@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html><head>
+    <title>CMMapDemo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<meta name="renderer" content="webkit|ie-comp|ie-stand">-->
+        <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- <meta name="force-rendering" content="webkit"/> -->
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
+    <link rel="stylesheet" href="css/codemirror.css">
+	<link rel="stylesheet" type="text/css" href="css/test.css">
+</head>
+<body onLoad="mapheight();">
+	
+	<div id="content">
+	    
+		<!--左边菜单-->
+		<div id="menu">
+			<ul>
+				<li style="height:3em;line-height:3em;" class="one_head" >
+				    <image class = "back" src="img/back.png"></image>功能列表
+				</li>
+				<li id="list_item16">
+					<a class="one_head" listid="1">亮点功能
+					<image class ="fordown1" src="img/back.png"></image>
+					</a>
+					<div id="submenu1" class="submenu">
+						<dl>
+							<dd><a href="page/j2.html" onclick="getresource('j2');" target="container">地图配色样式切换</a></dd>
+							<!--<dd><a href="page/j3.html" onclick="getresource('j3');" target="container">标准样式模板</a></dd>-->
+							<dd><a href="page/j4.html" onclick="getresource('j4');" target="container">地图显示元素控制</a></dd>
+							<dd><a href="page/c7.html" onclick="getresource('c7');" target="container">室内地图图层</a></dd>
+							<dd><a href="page/c2.html" onclick="getresource('c2');" target="container">热力图层</a></dd>
+							<dd><a href="page/c5.html" onclick="getresource('c5');" target="container">Canvas图层</a></dd>
+							<dd><a href="page/c6.html" onclick="getresource('c6');" target="container">Video图层</a></dd>
+							<dd><a href="page/l5.html" onclick="getresource('l5');" target="container">海量点展示</a></dd>
+							<dd><a href="page/l6.html" onclick="getresource('l6');" target="container">海量图形展示</a></dd>
+							<dd><a href="page/l8.html" onclick="getresource('l8');" target="container">城区海量点</a></dd>
+							<dd><a href="page/l9.html" onclick="getresource('l9');" target="container">城区海量多边形</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item1">
+					<a class="one_head" listid="1">地图示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu1" class="submenu">
+						<dl>
+							<dd><a href="page/a1.html" onclick="getresource('a1');" target="container">地图展示</a></dd>
+							<dd><a href="page/a2.html" onclick="getresource('a2');" target="container">最大/最小缩放级别</a></dd>
+							<!-- <dd><a href="page/a3.html" onclick="getresource('a3');" target="container">移动地图</a></dd> -->
+							<!-- <dd><a href="page/a6.html" onclick="getresource('a6');" target="container">设置地图显示范围</a></dd> -->
+							<dd><a href="page/a7.html" onclick="getresource('a7');" target="container">获取地图显示范围</a></dd>
+						    <!-- 	
+						    <dd><a href="page/a8.html" onclick="getresource('a8');" target="container">获取两点间距离C</a></dd>
+						    <dd><a href="page/a4.html" onclick="getresource('a4');" target="container">缩放地图</a></dd>
+						   -->
+							 <!-- <dd><a href="page/a9.html" onclick="getresource('a9');" target="container">启用/禁用地图操作</a></dd>   -->
+							<dd><a href="page/a10.html" onclick="getresource('a10');" target="container">地图当前中心点</a></dd>
+							<!-- 
+							<dd><a href="page/a11.html" onclick="getresource('a11');" target="container">地图当前缩放级别@</a></dd>
+							 -->
+							<dd><a href="page/a12.html" onclick="getresource('a12');" target="container">地图视野</a></dd>
+							<dd><a href="page/a13.html" onclick="getresource('a13');" target="container">获取最佳地图视野</a></dd>
+							<dd><a href="page/a14.html" onclick="getresource('a14');" target="container">获取包含特定地理区域或坐标的地图视野</a></dd>
+							<dd><a href="page/a15.html" onclick="getresource('a15');" target="container">地图可视区域</a></dd>
+							<dd><a href="page/a16.html" onclick="getresource('a16');" target="container">地图动画效果</a></dd>
+							<!--
+							<dd><a href="page/a9.html" onclick="getresource('a9');" target="container">ArcGIS JSAPI调用基地地图</a></dd>
+							-->
+						</dl>
+					</div>
+				</li>	
+				<li id="list_item2">
+					<a class="one_head" listid="2">地图控件示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu2" class="submenu">
+						<dl>
+							<dd><a href="page/b1.html" onclick="getresource('b1');" target="container">添加/删除工具条比例尺控件</a></dd>
+						  <!--	
+						  <dd><a href="page/b2.html" onclick="getresource('b2');" target="container">添加/删除地图类型C</a></dd> 
+						  -->
+							<dd><a href="page/b3.html" onclick="getresource('b3');" target="container">鹰眼缩略图</a></dd>
+							<dd><a href="page/b4.html" onclick="getresource('b4');" target="container">图层切换控件</a></dd>
+							<!--<dd><a href="page/b5.html" onclick="getresource('b5');" target="container">自定义地图样式T</a></dd>-->
+							<dd><a href="page/b6.html" onclick="getresource('b6');" target="container">显示/隐藏控件</a></dd>
+							<dd><a href="page/b7.html" onclick="getresource('b7');" target="container">鼠标指针样式</a></dd>
+							<dd><a href="page/b8.html" onclick="getresource('b8');" target="container">地图旋转控件</a></dd>
+						</dl>
+					</div>
+				</li>			
+				<li id="list_item3">
+					<a class="one_head" listid="3">叠加层示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu3" class="submenu">
+						<dl>
+							<dd><a href="page/c1.html" onclick="getresource('c1');" target="container">卫片／路况图层</a></dd>
+							<dd><a href="page/c2.html" onclick="getresource('c2');" target="container">热力图层</a></dd>
+							<dd><a href="page/c3.html" onclick="getresource('c3');" target="container">自定义栅格切片图层</a></dd>
+							<dd><a href="page/c4.html" onclick="getresource('c4');" target="container">图片图层</a></dd>
+							<dd><a href="page/c5.html" onclick="getresource('c5');" target="container">Canvas图层</a></dd>
+							<dd><a href="page/c6.html" onclick="getresource('c6');" target="container">Video图层</a></dd>
+							<dd><a href="page/c7.html" onclick="getresource('c7');" target="container">室内地图图层</a></dd>
+							<!-- <dd><a href="page/c8.html" onclick="getresource('c8');" target="container">行政区图层</a></dd> -->
+							<!--<dd><a href="page/c9.html" onclick="getresource('c9');" target="container">支持自定义图层的添加/删除R</a></dd>-->
+						</dl>
+					</div>
+				</li>
+				<li id="list_item4">
+					<a class="one_head" listid="4">事件示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu4" class="submenu">
+						<dl>              
+							<dd><a href="page/d1.html" onclick="getresource('d1');" target="container">地图单击事件</a></dd>
+							<dd><a href="page/d6.html" onclick="getresource('d6');" target="container">地图长按事件</a></dd>
+							<dd><a href="page/a5.html" onclick="getresource('a5');" target="container">拖拽地图事件</a></dd>
+							<dd><a href="page/d2.html" onclick="getresource('d2');" target="container">标记覆盖物(Marker)事件</a></dd>
+							<dd><a href="page/d3.html" onclick="getresource('d3');" target="container">形状覆盖物（圆形、多边形、线段等）事件</a></dd>
+
+							<dd><a href="page/d4.html" onclick="getresource('d4');" target="container">地标POI点击事件</a></dd>
+							<!-- <dd><a href="page/d5.html" onclick="getresource('d5');" target="container">注销事件</a></dd> -->
+						</dl>
+					</div>
+				</li>
+				<li id="list_item5">
+					<a class="one_head" listid="5">覆盖物示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu5" class="submenu">
+						<dl>
+							<dd><a href="page/e1.html" onclick="getresource('e1');" target="container">添加/删除覆盖物</a></dd>
+							 
+							<dd><a href="page/e2.html" onclick="getresource('e2');" target="container">设置点的弹跳动画</a></dd>
+							
+							<dd><a href="page/e3.html" onclick="getresource('e3');" target="container">设置点的掉落动画</a></dd>
+							<dd><a href="page/e4.html" onclick="getresource('e4');" target="container">覆盖物拖拽操作</a></dd>
+							<dd><a href="page/e5.html" onclick="getresource('e5');" target="container">设置覆盖物显示/隐藏</a></dd>
+							<!-- <dd><a href="page/e6.html" onclick="getresource('e6');" target="container">设置点标记信息显示</a></dd> -->
+						  <!--	
+						  <dd><a href="page/e7.html" onclick="getresource('e7');" target="container">获取覆盖物信息C</a></dd>
+							<dd><a href="page/e8.html" onclick="getresource('e8');" target="container">添加多个点示例C</a></dd>
+							<dd><a href="page/e9.html" onclick="getresource('e9');" target="container">从多个点里删除特定点C</a></dd>
+							<dd><a href="page/e10.html" onclick="getresource('e10');" target="container">加载海量点</a></dd>
+							<dd><a href="page/e11.html" onclick="getresource('e11');" target="container">添加自定义覆盖物C</a></dd> 
+							 -->
+							<dd><a href="page/e12.html" onclick="getresource('e12');" target="container">点标记</a></dd>
+							<dd><a href="page/e13.html" onclick="getresource('e13');" target="container">折线图形</a></dd>
+							<dd><a href="page/e14.html" onclick="getresource('e14');" target="container">多边形图形</a></dd>
+							<dd><a href="page/e15.html" onclick="getresource('e15');" target="container">圆图形</a></dd>
+						  <!--	
+						  <dd><a href="page/e16.html" onclick="getresource('e16');" target="container">信息窗口图形@C</a></dd>
+							<dd><a href="page/e17.html" onclick="getresource('e17');" target="container">右键菜单图形@</a></dd> 
+							      -->
+							<dd><a href="page/e18.html" onclick="getresource('e18');" target="container">获取地图覆盖物</a></dd>
+							<!--<dd><a href="page/e19.html" onclick="getresource('e19');" target="container">覆盖物容器坐标与地理坐标互转</a></dd>
+							
+							
+							<dd><a href="page/e12.html" onclick="getresource('e12');" target="container">添加/删除地面叠加层</a></dd>
+							<dd><a href="page/e13.html" onclick="getresource('e13');" target="container">行政区划轮廓</a></dd>
+							<dd><a href="page/e14.html" onclick="getresource('e14');" target="container">根据城市建议绘制行政区划</a></dd>
+							-->
+						</dl>
+					</div>
+				</li>
+				<li id="list_item6">
+					<a class="one_head" listid="6">信息窗口示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu6" class="submenu">
+						<dl>
+							<dd><a href="page/f1.html" onclick="getresource('f1');" target="container">添加纯文字的信息窗口</a></dd>
+							<dd><a href="page/f2.html" onclick="getresource('f2');" target="container">添加图文组合的信息窗口</a></dd>
+						  <!--	<dd><a href="page/f3.html" onclick="getresource('f3');" target="container">给多个点添加信息窗口</a></dd>
+							      <dd><a href="page/f4.html" onclick="getresource('f4');" target="container">获取信息窗口的内容</a></dd> 
+							      -->
+						</dl>
+					</div>
+				</li>
+				<li id="list_item7">
+					<a class="one_head" listid="7">右键菜单示例<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu7" class="submenu">
+						<dl>
+							<dd><a href="page/g1.html" onclick="getresource('g1');" target="container">给地图添加右键菜单</a></dd>
+							<dd><a href="page/g2.html" onclick="getresource('g2');" target="container">给覆盖物添加右键菜单</a></dd>
+						</dl>
+					</div>
+				</li>
+				
+				<li id="list_item9">
+					<a class="one_head" listid="9">地图容器<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu9" class="submenu">
+						<dl>              
+							<dd><a href="page/i1.html" onclick="getresource('i1');" target="container">获取地图的容器元素</a></dd>
+							<dd><a href="page/i2.html" onclick="getresource('i2');" target="container">获取地图视图大小（以像素表示</a></dd>
+							<dd><a href="page/i3.html" onclick="getresource('i3');" target="container">地图自动适应容器尺寸变化</a></dd>
+							<dd><a href="page/i4.html" onclick="getresource('i4');" target="container">像素坐标与经纬度坐标互转</a></dd>
+							<dd><a href="page/e19.html" onclick="getresource('e19');" target="container">经纬度坐标与平面地理坐标互转</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item10">
+					<a class="one_head" listid="10">地图显示模式控制<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu10" class="submenu">
+						<dl>              
+							<dd><a href="page/j1.html" onclick="getresource('j1');" target="container">普通地图、高精度地图</a></dd>
+							<dd><a href="page/j2.html" onclick="getresource('j2');" target="container">地图配色样式切换</a></dd>
+							<!--<dd><a href="page/j3.html" onclick="getresource('j3');" target="container">标准样式模板</a></dd>-->
+							<dd><a href="page/j4.html" onclick="getresource('j4');" target="container">地图显示元素控制</a></dd>
+							<dd><a href="page/j5.html" onclick="getresource('j5');" target="container">底图可点击设置</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item11">
+					<a class="one_head" listid="11">空间计算<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu11" class="submenu">
+						<dl>              
+							<dd><a href="page/k1.html" onclick="getresource('k1');" target="container">计算两点之间距离</a></dd>
+							<dd><a href="page/k2.html" onclick="getresource('k2');" target="container">判断两个经纬度坐标点是否相等</a></dd>
+							<dd><a href="page/k3.html" onclick="getresource('k3');" target="container">判断两个像素坐标点是否相等</a></dd>
+							<dd><a href="page/k4.html" onclick="getresource('k4');" target="container">判断两个矩形区域是否一致</a></dd>
+							<dd><a href="page/k5.html" onclick="getresource('k5');" target="container">判断一个地理坐标是否在某个矩形内</a></dd>
+							<dd><a href="page/k6.html" onclick="getresource('k6');" target="container">判断一个矩形区域是否完全包含在另一个矩形内</a></dd>
+							<dd><a href="page/k7.html" onclick="getresource('k7');" target="container">计算两个矩形的交集区域</a></dd>
+							<dd><a href="page/k8.html" onclick="getresource('k8');" target="container">放大某个矩形使其包含给定的点</a></dd>
+							<dd><a href="page/k9.html" onclick="getresource('k9');" target="container">获取矩形的对角坐标</a></dd>
+							<dd><a href="page/k10.html" onclick="getresource('k10');" target="container">返回矩形的中心点</a></dd>
+							<dd><a href="page/k11.html" onclick="getresource('k11');" target="container">计算矩形区域的跨度</a></dd>
+							<dd><a href="page/k12.html" onclick="getresource('k12');" target="container">球面坐标/平面坐标互转</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item12">
+					<a class="one_head" listid="12">复杂图形描画功能<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu12" class="submenu">
+						<dl>              
+							<dd><a href="page/l1.html" onclick="getresource('l1');" target="container">简单标注</a></dd>
+							<dd><a href="page/l2.html" onclick="getresource('l2');" target="container">矢量标注</a></dd>
+							<dd><a href="page/l3.html" onclick="getresource('l3');" target="container">字体图标标注</a></dd>
+							<dd><a href="page/l4.html" onclick="getresource('l4');" target="container">简单信息窗体</a></dd>
+							<dd><a href="page/l5.html" onclick="getresource('l5');" target="container">海量点展示</a></dd>
+							<dd><a href="page/l6.html" onclick="getresource('l6');" target="container">海量图形展示</a></dd>
+							<dd><a href="page/l7.html" onclick="getresource('l7');" target="container">轨迹展示</a></dd>
+						</dl>
+					</div>
+				</li>
+				
+				<li id="list_item14">
+					<a class="one_head" listid="14">扩展控件<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu14" class="submenu">
+						<dl>              
+							<!-- <dd><a href="page/m1.html" onclick="getresource('m1');" target="container">鼠标/触摸操作事件</a></dd> -->
+							<!-- <dd><a href="page/m2.html" onclick="getresource(m2);" target="container">鼠标在特定地图区域移动事件</a></dd> -->
+							<!-- <dd><a href="page/m3.html" onclick="getresource('m3');" target="container">持续触摸事件</a></dd> -->
+							<dd><a href="page/m4.html" onclick="getresource('m4');" target="container">地图移动事件</a></dd>
+							<dd><a href="page/m5.html" onclick="getresource('m5');" target="container">行政区划浏览控件</a></dd>
+							<dd><a href="page/m6.html" onclick="getresource(m6);" target="container">行政区划聚合控件</a></dd>
+							<dd><a href="page/m7.html" onclick="getresource('m7');" target="container">标注列表控件</a></dd>
+							<dd><a href="page/m8.html" onclick="getresource('m8');" target="container">城市选择器控件</a></dd>
+							<dd><a href="page/m9.html" onclick="getresource('m9');" target="container">地图选点控件</a></dd>
+							<dd><a href="page/m10.html" onclick="getresource('m10');" target="container">地图拖拽选址控件</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item15">
+					<a class="one_head" listid="15">全功能地图<image class ="fordown1" src="img/back.png"></image></a>
+					<div id="submenu15" class="submenu">
+						<dl>              
+							<dd><a href="page_q/mainPC.html" onclick="hideCode();" target="container">全功能地图</a></dd>
+						</dl>
+					</div>
+				</li>
+				<!--<li id="list_item9">
+					<a class="one_head" listid="9"><i class="t_close"></i>GPS功能</a>
+					<div id="submenu9" class="submenu">
+						<dl>              
+							<dd><a href="page/i1.html" onclick="getresource('i1');" target="container">单个点沿线运动</a></dd>
+							<dd><a href="page/i2.html" onclick="getresource('i2');" target="container">多点沿线运动</a></dd>
+						</dl>
+					</div>
+				</li>	
+				<li id="list_item10">
+					<a class="one_head" listid="10"><i class="t_close"></i>POI搜索示例</a>
+					<div id="submenu10" class="submenu">
+						<dl>              
+							<dd><a href="page/j1.html" onclick="getresource('j1');" target="container">关键字检索</a></dd>
+							<dd><a href="page/j2.html" onclick="getresource('j2');" target="container">圆形区域检索</a></dd>
+							<dd><a href="page/j3.html" onclick="getresource('j3');" target="container">本地检索的数据接口</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item11">
+					<a class="one_head" listid="11"><i class="t_close"></i>公交搜索接口</a>
+					<div id="submenu11" class="submenu">
+						<dl>              
+							<dd><a href="page/k1.html" onclick="getresource('k1');" target="container">根据起终点名称查询公交换乘</a></dd>
+							<dd><a href="page/k2.html" onclick="getresource('k2');" target="container">根据起终点经纬度查询公交换乘</a></dd>
+							<dd><a href="page/k3.html" onclick="getresource('k3');" target="container">公交换乘的数据接口</a></dd>
+							<dd><a href="page/k4.html" onclick="getresource('k4');" target="container">修改公交换乘的起终点图标</a></dd>
+							<dd><a href="page/k5.html" onclick="getresource('k5');" target="container">查询公交、地铁线路</a></dd>
+							<dd><a href="page/k6.html" onclick="getresource('k6');" target="container">获取公交换乘的时间、距离</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item12">
+					<a class="one_head" listid="12"><i class="t_close"></i>路径规划</a>
+					<div id="submenu12" class="submenu">
+						<dl>          
+							<dd><a href="page/m7.html" onclick="getresource('m7');" target="container">根据起终点名称查询驾车路线</a></dd>
+							<dd><a href="page/m1.html" onclick="getresource('m1');" target="container">根据起终点经纬度查询驾车路线</a></dd>
+							<dd><a href="page/m2.html" onclick="getresource('m2');" target="container">动态设置驾车途经点</a></dd>
+							<dd><a href="page/m3.html" onclick="getresource('m3');" target="container">驾车路线的数据接口</a></dd>
+							<dd><a href="page/m4.html" onclick="getresource('m4');" target="container">计算驾车时间和距离</a></dd>
+							<dd><a href="page/m5.html" onclick="getresource('m5');" target="container">计算打车费用</a></dd>
+							<dd><a href="page/m6.html" onclick="getresource('m6');" target="container">驾车路线的结果面板</a></dd>
+						</dl>
+					</div>
+				</li>-->
+			<!--
+				<li id="list_item15">
+					<a class="one_head" listid="15"><i class="t_close"></i>步行规划</a>
+					<div id="submenu15" class="submenu">
+						<dl>          
+							<dd><a href="page/p1.html" onclick="getresource('p1');" target="container">根据起终点名称规划步行线路</a></dd>
+							<dd><a href="page/p2.html" onclick="getresource('p2');" target="container">步行规划结果面板</a></dd>
+						</dl>
+					</div>
+				</li>  
+			-->
+			<!--	<li id="list_item13">
+					<a class="one_head" listid="13"><i class="t_close"></i>地理编码</a>
+					<div id="submenu13" class="submenu">
+						<dl>              
+							<dd><a href="page/n1.html" onclick="getresource('n1');" target="container">地址解析</a></dd>
+							<dd><a href="page/n2.html" onclick="getresource('n2');" target="container">逆地址解析</a></dd>
+						</dl>
+					</div>
+				</li>
+				<li id="list_item14">
+					<a class="one_head" listid="14"><i class="t_close"></i>定位示例</a>
+					<div id="submenu14" class="submenu">
+						<dl>              
+							<dd><a href="page/o1.html" onclick="getresource('o1');" target="container">浏览器定位</a></dd>
+						</dl>
+					</div>
+				</li>-->
+			</ul>
+		</div>
+		<!--中间部分-->
+		<div id="code_area" style="z-index:1002" unselectable="on">
+			<div id="openbar" unselectable="on">
+				<div id="d_menu"> 	
+					<div id="d_clip_container"><a id="d_clip_button" class="copy" style="z-index: 1000;" onClick="init();">复制</a></div> 
+					<div id="d_run_container"><a id="d_run_button" onClick="run();" class="run">运行</a></div>
+					<div id="d_refresh_container"><a id="d_refresh_button" onClick="refresh();">刷新</a></div>
+				<!--<div id="d_help_container"><a id="d_help_button" href="" >帮助</a></div>-->
+				</div>
+				<p>源代码编辑器</p>
+			</div>
+			<textarea id="code" name="code"  class="clearfix"></textarea>
+			<div id="code_close" onClick="toggleFooter();" style="display: block;"></div><!--中间区域隐藏按钮-->
+		</div>
+		<div id="drag"></div>
+		<!--右侧地图-->
+		<div id="mapContent" class="clearfix">
+		    <div id="header">
+			    <h1 class = "title">中国移动地图服务能力</h1>
+		       <a class = "logo"></a>
+	        </div>
+		    <div id="code_open" onClick="toggleFooter();" style="display: none;"></div><!--中间区域显现按钮-->
+			<div id="overiframe" style=" background:url(about:_blank);" unselectable="on"></div>
+			<iframe class="" unselectable="on" name="container" id="container" src="page/welcome.html" style="width: 100%; height: 90.8%;"></iframe>
+		</div>
+	</div>
+    <!--for jsdemo guide-->
+
+    <script type="text/javascript" src="js/codemirror.min.js"></script>
+    <script type="text/javascript" src="js/ZeroClipboard.js"></script>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript">
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		lineNumbers: false,
+		mode: "text/html",
+		lineWrappingz:true,
+		extraKeys: {"Ctrl-Space": 'autocomplete'}
+	});
+	$('#menu .one_head').on('click',function(){
+	    $(this).find('img.fordown1').toggleClass('fordown');
+		console.log('enter');
+	})
+	$(".CodeMirror-scroll").hover(function(){
+			$(this).get(0).style.cursor = "text";
+	});
+	$('.logo').on('click',function(){
+	   
+	    var content = $('#content');
+		if(content.position().left==0){
+		    content.animate({
+			    left:'-51.1%'
+			},200);
+		}else{
+		    content.animate({
+			    left:0
+			},200);
+		}
+    });
+	</script>
+</body>
+</html>
