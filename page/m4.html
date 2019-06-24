@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/positionPicker.html -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/demo-center.css">
+    <script src="../js/demoutils.js"></script>
+    <title>地图移动事件</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+    }
+    
+    .map {
+        height: 100%;
+        width: 100%;
+        float: left;
+    }
+    
+    #right {
+        color: #444;
+        background-color: #f8f8f8;
+        width: 40%;
+        float: left;
+        height: 100%;
+    }
+    
+    #start,
+    #stop,
+    #right input {
+        margin: 4px;
+        margin-left: 15px;
+    }
+    
+    .title {
+        width: 100%;
+        background-color: #dadada
+    }
+    
+    button {
+        border: solid 1px;
+        margin-left: 15px;
+        background-color: #dadafa;
+    }
+    
+    .c {
+        font-weight: 600;
+        padding-left: 15px;
+        padding-top: 4px;
+    }
+    
+    #lnglat,
+    #address,
+    #nearestJunction,
+    #nearestRoad,
+    #nearestPOI,
+    .title {
+        padding-left: 15px;
+    }
+    </style>
+</head>
+
+<body >
+    <div id="container" class="map" tabindex="0"></div>
+    <div class="info">
+        <h4 id="text"></h4>
+        <p>当前中心点：<span id="map-center">121.498586,31.239637</span></p>
+    </div>
+    <div class="input-card" style="width:16rem">
+        <h4>地图移动事件</h4>
+        <div>
+          <div class="input-item">
+            <button id="moveOn" class="btn" style="margin-right:1rem;">绑定事件</button>
+            <button id="moveOff" class="btn">解绑事件</button>
+          </div>
+        </div>
+    </div>
+    <div id="tip"></div>
+
+    <script type="text/javascript">
+        var map = null;
+        function initMap() {
+            map = new CMMap.Map('container', {
+                //center:[121.498586,31.239637]
+            });
+            logMapinfo();
+        }
+        var logMapinfo = function (){
+            var zoom = map.getZoom(); //获取当前地图级别
+            var center = map.getCenter(); //获取当前地图级别
+            center = JSWrap.lnglatToArrStr(center);
+            document.querySelector("#map-center").innerText = center;
+        };
+        function mapMovestart(){
+            document.querySelector("#text").innerText = '地图移动开始';
+        }
+        function mapMove(){
+            logMapinfo();
+            document.querySelector("#text").innerText = '地图正在移动';
+        }
+        function mapMoveend(){
+            document.querySelector("#text").innerText = '地图移动结束';
+        }
+
+        // 事件绑定
+        function moveOn(){
+            log.success("绑定事件!");
+            map.on('movestart', mapMovestart);
+            map.on('mapmove', mapMove);
+            map.on('moveend', mapMoveend);
+        }
+        // 解绑事件
+        function moveOff(){
+            log.success("解除事件绑定!");
+            map.off('movestart', mapMovestart);
+            map.off('mapmove', mapMove);
+            map.off('moveend', mapMoveend);
+        }
+
+        // 给按钮绑定事件
+        document.getElementById("moveOn").onclick = moveOn;
+        document.getElementById("moveOff").onclick = moveOff;
+    if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+
+    </script>
+</body>
+
+</html>

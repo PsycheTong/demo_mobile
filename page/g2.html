@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>给覆盖物添加右键菜单</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+		<script>
+			var map;
+			var marker;
+			//var contextMenu;
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {
+					zoom: 13,
+					center:new CMMap.LngLat(116.397428, 39.90923)
+
+				});
+				marker = new CMMap.Marker({
+						position: new CMMap.LngLat(116.397428, 39.90923)
+					});
+					marker.setMap(map);
+					creatMenu(marker);
+			}
+
+			//创建右键菜单
+			function creatMenu(marker) {
+				var contextMenu = new CMMap.ContextMenu();
+				//右键放大
+				contextMenu.addItem("获取位置", function() {
+					alert(marker.getPosition());
+				}, 0);
+				//地图绑定鼠标右击事件——弹出右键菜单
+				marker.on("rightclick", function(e) {
+					contextMenu.open(map, marker.getPosition());
+				});
+			}
+	if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+		</script>
+	</head>
+
+	<body >
+
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

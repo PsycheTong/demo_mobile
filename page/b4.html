@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>图层的添加与移除</title>
+  <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body >
+  <div id="container"></div>
+
+
+  <script type="text/javascript" src="../js/JSWrap.js"></script>
+  <!--<script type="text/javascript" src='../js/bundle.js'></script>-->
+  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+  <script>
+  var map,maptype;
+  function mapInit(){
+    //创建地图
+       map= new CMMap.Map('container', {
+        resizeEnable: true,
+        zoom: 11,
+        center: [116.405285, 39.904989]
+      });
+      maptype = new CMMap.MapType();
+      map.addControl(maptype);
+  }
+      if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+  </script>
+</body>
+
+</html>

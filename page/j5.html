@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>底图可点击设置</title>
+  <link rel="stylesheet" href="../css/demo-center.css" />
+  <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+
+    #map-styles .input-item {
+      height: 2rem;
+    }
+
+    #map-styles .input-item span{
+      display: inline-block;
+      width: 4rem;
+    }
+
+    #map-styles .input-item .input-text {
+      color: #0288d1;
+      margin-left: 1rem;
+      margin-right: 0rem;
+      width: 6rem;
+    }
+  </style>
+</head>
+
+<body >
+  <div id="container"></div>
+   <script type="text/javascript" src="../js/JSWrap.js"></script>
+   <!--<script type="text/javascript" src="../js/bundle.js"></script>-->
+  <script>
+    //初始化地图
+    var map;
+    function mapInit(){
+     map = new CMMap.Map('container', {
+      doubleClickZoom:false,
+      isHotspot:true
+    });
+
+      map.on('hotspotclick',function(ev){
+        alert(ev.poi.name);
+      });
+    }
+      if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+
+  </script>
+</body>
+
+</html>

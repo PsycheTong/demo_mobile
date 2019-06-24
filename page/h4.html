@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>鼠标点击拾取坐标</title>
+
+		<link rel="stylesheet" href="css/main.css" type="text/css">
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+		<script>
+			function mapInit() {
+				var map = new CMMap.Map("mapContainer", {
+					 center: [ 116.397428,  39.90923 ], zoom: 10, rotation: 0 
+				});
+
+				map.on("click", function(e) {
+					alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图！');
+				});
+			}
+	if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+		</script>
+	</head>
+
+	<body >
+
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

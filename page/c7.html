@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8">
+<script type="text/javascript">
+</script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+      h3{
+        font-size: 1.17em;
+        line-height: 1.4;
+        font-weight: bold;
+        margin: 2px;
+      }
+      hr{
+        margin: 1px;
+      }
+      html,body{
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+      .map{
+        height: 100%;
+        width: 100%;
+        float: left;
+      }
+   #mapDiv .amap-indoormap-floorbar-control{bottom:10%}
+    </style>
+    <title>室内地图</title>
+  </head>
+  <body >
+  <div id="mapDiv" class="map" tabindex="0"></div>
+  <script type="text/javascript" src="../js/JSWrap.js"></script>
+  <script type="text/javascript">
+  var   map;
+  function mapInit(){
+    map = new CMMap.Map("mapDiv", {
+        zoom:3,
+        zooms:[3,25]
+    });
+    var layer = new CMMap.IndoorMap({
+        hcolor:{
+            r:246 ,
+            g:91,
+            b:63,
+            a:255
+        }
+    });
+    layer.setMap(map);
+    layer.on('RegionClick',function (e) {
+        var building = layer.getSelectedBuilding();
+        var shop = e.region;
+       console.log('楼层名称:'+building.floor_details.floor_names[building.floor]+',楼层索引:'+building.floor_details.floor_indexs[building.floor]+',建筑物id:'+building.id+',建筑物名称:'+building.name+',RegionId:'+shop.id+',商铺id:'+(shop.shopid?shop.shopid:'')+',商铺英文名称:'+shop.enName+',商铺中文名称:'+shop.cnName);
+    });
+    map.on('hotspotclick',function(data){
+      var poi = data.poi;
+       console.log('类型:'+poi.type+',id:'+poi.id+',经度:'+poi.lon+',纬度:'+poi.lat+',名称:'+poi.name);
+    })
+
+    setTimeout(function () {
+        layer.showIndoorMap('0001',2);
+    },1000);
+  }
+
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+
+       
+    </script>
+
+  </body>
+  
+</html>

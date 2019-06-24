@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>计算两个矩形的交集区域</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css"/>
+    <style>
+      html,body,#container{
+        height: 100%
+      }
+    </style>
+</head>
+<body >
+<div id="container"></div>
+<div class='info'>
+        <h4>当前矩形的交集区域（Bounds）</h4>
+    <p>NorthEast坐标：<span id="jne" class="lnglat"></span></p>
+    <p>SouthWest坐标：<span id="jsw" class="lnglat"></span></p>
+</div>
+<div class="input-card">
+    <label style='color:grey'>输入一个矩形的范围：(经度,纬度)</label>
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >左下角经纬度</span>
+            </div>
+            <input id='lblnglat1' type="text" value="116.150625,39.70992">
+            
+    </div>
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >右上角经纬度</span>
+            </div>
+            <input id='rtlnglat1' type="text" value="116.70638,40.129961">
+            
+    </div>
+    <label style='color:grey'>输入另一个矩形的范围：(经度,纬度)</label>
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >左下角经纬度</span>
+            </div>
+            <input id='lblnglat2' type="text" value="116.150625,39.72992">
+            
+    </div>
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >右上角经纬度</span>
+            </div>
+            <input id='rtlnglat2' type="text" value="116.82638,40.149961">
+            
+    </div>
+    <div>
+        <input id="lnglatToPixel" type="button" class="btn" value="获取两个矩形相交范围" />
+    </div>
+</div>
+<script type="text/javascript">
+    //初始化地图对象，加载地图
+    var map;
+    function mapInit(){
+        map = new CMMap.Map("container", {
+            resizeEnable: true,
+            zoom: 6
+        });
+        getIntersectionBounds();
+    }
+    var $ = function(elementId){
+        return document.getElementById(elementId);
+    };
+    var lblnglat1 = $('lblnglat1');
+    var rtlnglat1 = $('rtlnglat1');
+    var lblnglat2 = $('lblnglat2');
+    var rtlnglat2 = $('rtlnglat2');
+ 
+  function getIntersectionBounds(){
+        var lblnglat1Val = lblnglat1.value.split(',');
+        var lbLngLat1 = new CMMap.LngLat(parseFloat(lblnglat1Val[0]), parseFloat(lblnglat1Val[1]));
+        var rtlnglat1Val = rtlnglat1.value.split(',');
+        var rtLngLat1 = new CMMap.LngLat(parseFloat(rtlnglat1Val[0]), parseFloat(rtlnglat1Val[1]));
+
+        var lblnglat2Val = lblnglat2.value.split(',');
+        var lbLngLat2 = new CMMap.LngLat(parseFloat(lblnglat2Val[0]), parseFloat(lblnglat2Val[1]));
+        var rtlnglat2Val = rtlnglat2.value.split(',');
+        var rtLngLat2 = new CMMap.LngLat(parseFloat(rtlnglat2Val[0]), parseFloat(rtlnglat2Val[1]));
+
+        var bounds1 = new CMMap.Bounds(lbLngLat1,rtLngLat1);
+        var bounds2 = new CMMap.Bounds(lbLngLat2,rtLngLat2);
+
+        console.log(bounds1);
+        console.log(bounds2);
+
+         var bounds = CMMap.GeometryUtil.intersectionRectangel(bounds1,bounds2);
+         if(bounds){
+                document.querySelector("#jne").innerText = bounds.getNorthEast().toString();
+                document.querySelector("#jsw").innerText = bounds.getSouthWest().toString();
+         } else {
+                document.querySelector("#jne").innerText = '';
+                document.querySelector("#jsw").innerText = '';
+         }
+
+  }
+    document.getElementById("lnglatToPixel").onclick = getIntersectionBounds;
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+</script>
+</body>
+</html>

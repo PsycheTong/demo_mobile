@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>浏览器定位</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script language="javascript" src="http://223.100.246.29:9091/SDKService/jssdk/auth?v=1.0&key=5592f4830d22caccc27546e61faf9048"></script>
+		<script>
+			var map;
+
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {
+					view: {
+						center: {
+							lng: 123.4315,
+							lat: 41.8057
+						},
+						zoom: 13,
+						rotation: 0
+					},
+					zooms: [3, 18],
+					cursor: "default",
+					animateEnable: true,
+					rotateEnable: false,
+					resizeEnable: false,
+					dragEnable: true,
+					zoomEnable: true,
+					doubleClickZoom: true,
+					keyboardEnable: true,
+					jogEnable: true,
+					scrollWheel: false,
+					touchZoom: true
+
+				});
+				
+				map.plugin(["CMMap.OverLay"], function() {
+
+				});
+				
+			}
+
+			function getLocation() {
+				if (navigator.geolocation) {
+					//使用H5标准方法，但是由于定位服务及应答结果来源于浏览器厂商，可能会出现不同浏览器运行时，结果不同的情况
+					navigator.geolocation.getCurrentPosition(locationSuccess, locationError,{
+						// 指示浏览器获取高精度的位置，默认为false
+						enableHighAccuracy: true,
+						// 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+						timeout: 5000,
+						// 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+						maximumAge: 3000
+					});
+				}else{
+					alert("该浏览器不支持H5定位！");
+				}
+			}
+			
+			function locationError(error){
+				switch(error.code) {
+					case error.TIMEOUT:
+						alert("连接超时！");
+						break;
+					case error.POSITION_UNAVAILABLE:
+						alert('无法获得位置！');
+						break;
+					case error.PERMISSION_DENIED:
+						alert('未许可位置共享！');
+						break;
+					case error.UNKNOWN_ERROR:
+						alert('未知错误！');
+						break;
+				}
+			}
+
+			function locationSuccess(position) {
+				var longitude = position.coords.longitude;
+				var latitude = position.coords.latitude;
+				alert("经度 : " + longitude + "   纬度: " + latitude);
+				map.setCenter(new CMMap.LngLat(longitude, latitude));
+				createPoint(longitude,latitude);
+			}
+
+			function createPoint(lng,lat) {
+				var marker = new CMMap.Marker({
+					position: new CMMap.LngLat(lng, lat),
+					clickable: true,
+					draggable: true
+				});
+				marker.setMap(map);
+				
+			}
+	
+		</script>
+	</head>
+
+	<body onload="mapInit();">
+		<button onclick="getLocation()">定位</button>
+		<div id="mapContainer" style="position: relative;"></div>
+	</body>
+
+</html>

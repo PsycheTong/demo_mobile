@@ -1,0 +1,67 @@
+<!-- 重点：SvgMarker.Shape -->
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/overlay/SvgMarker/examples/all-shapes.html -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>各类形状</title>
+    <style>
+    html,
+    body,
+    #container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+    </style>
+</head>
+
+<body >
+    <div id="container"></div>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+     <!--<script type="text/javascript" src="../js/bundle.js"></script>-->
+
+    <script type="text/javascript">
+    function mapInit(){
+        //创建地图
+        var map = new CMMap.Map('container', {
+            zoom: 4
+        });
+
+         loadUIScript(function(){
+            //just some colors
+         if (!SvgMarker.supportSvg) {
+            //当前环境并不支持SVG，此时SvgMarker会回退到父类，即SimpleMarker
+            alert('当前环境不支持SVG');
+        }
+
+        //创建一个水滴状的shape
+        var shape = new SvgMarker.Shape.WaterDrop({
+            height: 60, //高度
+            //width: **, //不指定,维持默认的宽高比
+            fillColor: 'orange' //填充色
+            //strokeWidth: 1, //描边宽度
+            //strokeColor: '#666' //描边颜色
+        });
+
+        //利用该shape构建SvgMarker
+        new SvgMarker(shape, {
+            zIndex: 120,
+            map: map,
+            position: map.getCenter(),
+            showPositionPoint: true
+        });
+    });
+        
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+    </script>
+</body>
+
+</html>

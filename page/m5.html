@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/positionPicker.html -->
+    <meta charset="utf-8">
+     <meta name="isui" content="true" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>行政区划浏览</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+    }
+    
+    .map {
+        height: 100%;
+        width: 100%;
+        float: left;
+    }
+    
+    #right {
+        color: #444;
+        background-color: #f8f8f8;
+        width: 40%;
+        float: left;
+        height: 100%;
+    }
+    
+    #start,
+    #stop,
+    #right input {
+        margin: 4px;
+        margin-left: 15px;
+    }
+    
+    .title {
+        width: 100%;
+        background-color: #dadada
+    }
+    
+    button {
+        border: solid 1px;
+        margin-left: 15px;
+        background-color: #dadafa;
+    }
+    
+    .c {
+        font-weight: 600;
+        padding-left: 15px;
+        padding-top: 4px;
+    }
+    
+    #lnglat,
+    #address,
+    #nearestJunction,
+    #nearestRoad,
+    #nearestPOI,
+    .title {
+        padding-left: 15px;
+    }
+    </style>
+</head>
+
+<body >
+    <div id="container" class="map" tabindex="0"></div>
+    <link type="text/css" rel="stylesheet" href="https://webapi.amap.com/ui/1.0/plug/ext/font-awesome/css/font-awesome.css?v=1.0.11">
+    <script type="text/javascript">
+        var map = null,districtExplorer;
+        function initMap() {
+            map = new CMMap.Map('container', {
+                zoom: 6
+            })
+            
+            map.on('complete', function () {
+                if(districtExplorer)
+                map.setFitView(districtExplorer.getAllFeaturePolygons(),10);
+            });
+                loadUIScript(function(){
+                    districtExplorer = initPage(DistrictExplorer);
+                });
+        }
+        function initPage(DistrictExplorer) {
+            //创建一个实例
+            var districtExplorer = new DistrictExplorer({
+                eventSupport:true,
+                map: map //关联的地图实例
+            });
+
+            var adcode = 100000; //全国的区划编码
+
+            districtExplorer.loadAreaNode(adcode, function(error, areaNode) {
+
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+                //绘制载入的区划节点
+                renderAreaNode(districtExplorer, areaNode);
+            });
+            districtExplorer.on('featureClick',function (ev) {
+                
+            })
+            return districtExplorer;
+        }
+
+        function renderAreaNode(districtExplorer, areaNode) {
+
+            //清除已有的绘制内容
+            districtExplorer.clearFeaturePolygons();
+
+            //just some colors
+            var colors = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00"];
+
+            //绘制子级区划
+            districtExplorer.renderSubFeatures(areaNode, function(feature, i) {
+
+                var colorIndex = i % colors.length;
+                if (colorIndex >= colors.length)
+                    console.log(colorIndex);
+                var fillColor = colors[colorIndex];
+                colorIndex = colors.length - 1 - i % colors.length;
+                if (colorIndex >= colors.length)
+                    console.log(colorIndex);
+                var strokeColor = colors[colorIndex];
+
+                return {
+                    cursor: 'default',
+                    bubble: true,
+                    strokeColor: strokeColor, //线颜色
+                    strokeOpacity: 1, //线透明度
+                    strokeWeight: 1, //线宽
+                    fillColor: fillColor, //填充色
+                    fillOpacity: 0.35, //填充透明度
+                };
+            });
+
+            //绘制父级区划，仅用黑色描边
+            districtExplorer.renderParentFeature(areaNode, {
+                cursor: 'default',
+                bubble: true,
+                strokeColor: '#000', //线颜色
+                fillColor: null,
+                strokeWeight: 3, //线宽
+            });
+        }
+    if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+    </script>
+</body>
+
+</html>

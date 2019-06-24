@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    </style>
+    <title>多边形的绘制</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+</head>
+<body >
+<div id="container"></div>
+<script type="text/javascript">
+function mapInit(){
+ var map = new CMMap.Map("container", {
+        center: [116.400274, 39.905812],
+        zoom: 14
+    });
+
+    var path = [
+        [116.403322, 39.920255],
+        [116.410703, 39.897555],
+        [116.402292, 39.892353],
+        [116.389846, 39.891365]
+    ]
+
+    var polygon = new CMMap.Polygon({
+        path: path,
+        isOutline: true,
+        borderWeight: 3,
+        strokeColor: "#FF33FF", 
+        strokeWeight: 6,
+        strokeOpacity: 0.2,
+        fillOpacity: 0.4,
+        fillColor: '#1791fc',
+        zIndex: 50,
+        draggable: true
+    })
+
+    polygon.setMap(map)
+    // 缩放地图到合适的视野级别
+    map.setFitView([ polygon ]);
+
+}
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+
+</script>
+</body>
+</html>

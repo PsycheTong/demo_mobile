@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/geo/DistrictExplorer/examples/index.html -->
+     <meta name="isui" content="true" />
+    <meta charset="utf-8">
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+     <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <title>城市选择器控件</title>
+    <style type="text/css">
+        html,body{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" style="width:100%;height:50%"></div>
+    <button id="openBtnLight">浅色主题</button>
+    <button id="openBtnDark">暗色主题</button>
+    <div>
+        <pre id="selectedCityInfo">
+        
+    </pre>
+</div>
+    
+     <!--<script type="text/javascript" src="../js/bundle.js"></script>-->
+  
+    <script type="text/javascript">
+    function initMap(){
+
+    //创建地图
+    var map = new CMMap.Map('container', {
+        zoom: 4
+    });
+     loadUIScript(function(){
+ var cityPicker = new MobiCityPicker({
+        topGroups: [{
+            //组的唯一标识
+            id: 'common_city',
+            //标题
+            title: '常用城市',
+            //右侧锚点索引标题，建议单个字符
+            anchorTitle: '常',
+            //城市的adcodes列表(adcodes内容可以用MobiCityPicker.getCityData()获取)
+            adcodes: [
+                "110000",
+                "310000",
+                "440300",
+                "440100",
+                "510100",
+                "330100",
+                "320500",
+                "500000",
+                "420100",
+                "610100",
+                "320100",
+                "120000"
+            ]
+        }, {
+            //组的唯一标识
+            id: 'common_city_1',
+            //标题
+            title: '推荐城市',
+            //右侧锚点索引标题，建议单个字符
+            anchorTitle: '荐',
+            //城市的adcodes列表(adcodes内容可以用MobiCityPicker.getCityData()获取)
+            adcodes: [
+                "110000",
+                "310000",
+                "120000"
+            ]
+        }]
+    });
+
+
+  document.getElementById('openBtnLight').onclick = function() {
+    console.log('light');
+                cityPicker.setTheme('light');
+                cityPicker.show();
+            };
+
+         document.getElementById('openBtnDark').onclick = function() {
+    console.log('dark');
+                cityPicker.setTheme('dark');
+                cityPicker.show();
+            };;
+
+    //cityPickerReady(cityPicker);
+
+    cityPicker.show();
+    cityPicker.on('citySelected',function (ev) {
+       cityPicker.hide();
+       notifyCityInfo(ev.cityinfo);
+    });
+    var marker = new CMMap.Marker();
+
+        /**
+         * 显示对应的城市信息
+         */
+        //jshint -W003
+        function notifyCityInfo(cityInfo) {
+
+            document.getElementById('selectedCityInfo').innerHTML = JSON.stringify(cityInfo, null, 2);
+
+            marker.setMap(map);
+
+            marker.setPosition([cityInfo.lng, cityInfo.lat]);
+
+            map.setCenter(marker.getPosition());
+        }
+        });
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+    </script>
+</body>
+
+</html>

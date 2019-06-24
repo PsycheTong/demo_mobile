@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>图层的添加与移除</title>
+  <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <div class="input-card" style="width:24rem;">
+    <h4>添加、删除图层（Layer）</h4>
+    <div class="input-item">
+      <label>卫星图层：</label>
+      <button class="btn" id="add-satellite-layer" style="margin-right:1rem;">添加卫星图层</button>
+      <button class="btn" id="remove-satellite-layer">删除卫星图层</button>
+    </div>
+    <div class="input-item">
+      <label>红色标记：</label>
+      <button class="btn" id="add-roadnet-layer" style="margin-right:1rem;">添加路网图层</button>
+      <button class="btn" id="remove-roadnet-layer">删除路网图层</button>
+    </div>
+  </div>
+
+  <script language="javascript" src="http://61.189.20.113:8000/maps?v=1.1&key=1234&name=bundle"></script>
+  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+  <script>
+    //创建地图
+    var map = new CMMap.Map('container', {
+      resizeEnable: true,
+      zoom: 11,
+      center: [116.405285, 39.904989]
+    });
+
+    // 构造官方卫星、路网图层
+    var satelliteLayer = new CMMap.TileLayer.Satellite();
+    var roadNetLayer =  new CMMap.TileLayer.RoadNet();
+
+    //批量添加图层
+    map.add([satelliteLayer, roadNetLayer]);
+
+    //事件绑定
+    document.querySelector("#add-satellite-layer").onclick = function() {
+      map.add(satelliteLayer);
+    }
+
+    document.querySelector("#remove-satellite-layer").onclick = function() {
+      map.remove(satelliteLayer);
+    }
+
+    document.querySelector("#add-roadnet-layer").onclick = function() {
+      map.add(roadNetLayer);
+    }
+
+    document.querySelector("#remove-roadnet-layer").onclick = function() {
+      map.remove(roadNetLayer);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/positionPicker.html -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>轨迹展示</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+    }
+    
+    .map {
+        height: 100%;
+        width: 100%;
+        float: left;
+    }
+    
+    #right {
+        color: #444;
+        background-color: #f8f8f8;
+        width: 40%;
+        float: left;
+        height: 100%;
+    }
+    
+    #start,
+    #stop,
+    #right input {
+        margin: 4px;
+        margin-left: 15px;
+    }
+    
+    .title {
+        width: 100%;
+        background-color: #dadada
+    }
+    
+    button {
+        border: solid 1px;
+        margin-left: 15px;
+        background-color: #dadafa;
+    }
+    
+    .c {
+        font-weight: 600;
+        padding-left: 15px;
+        padding-top: 4px;
+    }
+    
+    #lnglat,
+    #address,
+    #nearestJunction,
+    #nearestRoad,
+    #nearestPOI,
+    .title {
+        padding-left: 15px;
+    }
+    </style>
+</head>
+
+<body >
+    <div id="container" class="map" tabindex="0"></div>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+     <!--<script type="text/javascript" src="../js/bundle.js"></script>-->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <script type="text/javascript">
+    function mapInit(){
+
+        //创建地图
+    var map = new CMMap.Map('container', {
+        zoom: 4
+    });
+      loadUIScript(function(){
+   window.layer = initTrajectoryLayer(map);  
+   });  
+    }
+
+
+    function initTrajectoryLayer(map) {
+        var colors = [
+            "#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00",
+            "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707",
+            "#651067", "#329262", "#5574a6", "#3b3eac"
+        ];
+        var pathStyle = {
+            simplifyFlag : 5,
+            minArea : 36,
+            lineWidth: 6,
+            strokeStyle:'#E04399',
+            lineAlpha : 0.6,
+            getLineStyle : function (idx) {
+                idx = idx % colors.length;
+                return {
+                    lineWidth : 6,
+                    strokeStyle: colors[idx>colors.length ? 0 : idx] ,
+                    lineAlpha : 0.6,
+                };
+            }
+        }
+
+        var layer = new TrajectoryLayer({
+            map: map, //所属的地图实例
+            // autoSetFitView: 0,
+            // renderOptions: defaultRenderOptions
+        }, pathStyle);
+        layer.renderEngine.setNodeAreaOpts({
+            width: 8,
+            height: 8,
+            // fillStyle: '#C71585',
+            alpha:0.8,
+        });
+        layer.renderEngine.navAnimalFps = 20;
+        var $ = TrajectoryLayer.utils.$;
+        // $('<div id="loadingTip">加载数据，请稍候...</div>').appendTo(document.body);
+        $.getJSON('https://a.amap.com/amap-ui/static/data/big-routes.json', function(dat) {
+
+            // $('#loadingTip').remove();
+            var data = dat;
+            // data = layer.simplifyDat(dat, 10);
+            var dataSource = {
+                getLnglatObj : function(idx) {
+                    var geoarr = data[idx]['path'];
+                    return geoarr;
+                },
+                dataLength : function() {
+                    return !data ? 0 : data.length;
+                },
+            };
+            layer.setDataSource(dataSource);
+            for (var i=0;i<data.length;i++){
+                // if (i != 3)
+                //     continue;
+                if (i%3 == 0){
+                    // loadImage(i);
+                    addNavitor(i);
+                }
+            }
+        });
+        return layer;
+    }
+
+    function loadImage(i) {
+        var icon = new Image();
+        icon.src = 'http://webapi.amap.com/ui/1.0/ui/misc/PathSimplifier/examples/imgs/car.png';
+        icon.onload = function () {
+            addNavitor(i,icon);
+        }
+    }
+
+    function addNavitor(i, icon) {
+        var nav = new NavSprite( i, {
+            enableLoop: i%2 != 0,
+            stepFps : 2000,
+            icon : icon,
+            width : 30,
+            height : 30,
+            alpha: 1
+            // animInterval: 1500,
+            // speed: (i%4==0) ? 1e3 * 2 : 1e3 ,
+        });
+        // nav.setIcon('http://webapi.amap.com/ui/1.0/ui/misc/PathSimplifier/examples/imgs/car.png');
+        layer.addNavigator(nav);
+        nav.start();
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>添加/删除覆盖物</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+		<script>
+			var map;
+			var marker;
+			var circle;
+
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", { zoom: 13,center:new CMMap.LngLat(116.397428, 39.90923)});
+			}
+
+			//添加圆覆盖物
+			function addCircle() {
+				if(!circle){
+					circle = new CMMap.Circle({
+					center: new CMMap.LngLat(116.403322, 39.920255), // 圆心位置
+					radius: 1000, //半径
+					strokeColor: "#F33", //线颜色
+					strokeOpacity: 1, //线透明度
+					strokeWeight: 3, //线粗细度
+					fillColor: "#ee2200", //填充颜色
+					fillOpacity: 0.35 //填充透明度	
+				});
+
+				}
+				
+				circle.setMap(map);
+			};
+			//添加点
+			function addMarker() {
+				if(!marker){
+				marker = new CMMap.Marker({
+					position: new CMMap.LngLat(116.397428, 39.90923),
+					offset: new CMMap.Pixel(0, 0),
+					clickable: true
+				});
+			}
+				marker.setMap(map);
+			};
+
+			function deleteCircle() {
+				circle.setMap(null);
+			};
+
+			function deleteMarker() {
+				marker.setMap(null);
+			};
+	if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+		</script>
+	</head>
+
+	<body >
+		<div style="position: absolute;top: 10px;left: 10px;z-index: 2;">
+			<input type="button" value="添加圆覆盖物" onclick="addCircle();">
+			<input type="button" value="添加点标记" onclick="addMarker();">
+			<input type="button" value="删除圆覆盖物" onclick="deleteCircle();">
+			<input type="button" value="删除点标记" onclick="deleteMarker();">
+		</div>
+
+
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

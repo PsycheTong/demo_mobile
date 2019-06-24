@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>地图显示范围</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css"/>
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lnglat {
+            color: #0288d1;
+        }
+    </style>
+</head>
+
+<body >
+<div id="container"></div>
+<div class="info">
+    <h4>当前地图显示范围（Bounds）</h4>
+    <p>NorthEast坐标：<span id="ne" class="lnglat"></span></p>
+    <p>SouthWest坐标：<span id="sw" class="lnglat"></span></p>
+</div>
+<div class="input-card" style="width:16rem;">
+    <h4>控制地图显示范围</h4>
+    <div class="input-item">
+        <button class="btn" id="reset-bounds">指定地图显示范围</button>
+    </div>
+</div>
+
+<script>
+
+    var map = null;
+    function initMap() {
+        //创建地图
+        map = new CMMap.Map('container', {
+            zoom: 5,
+            center: [116.405285, 39.904989]
+        });
+        map.on('complete', function () {
+            logMapBounds();
+        });
+
+        //绑定地图移动与缩放事件
+        map.on('moveend', logMapBounds);
+        map.on('zoomend', logMapBounds);
+    };
+
+    //显示当前地图边界范围坐标
+    function logMapBounds() {
+        var bounds = map.getBounds();
+        document.querySelector("#ne").innerText = JSWrap.lnglatToArrStr(bounds.getNorthEast());
+        document.querySelector("#sw").innerText = JSWrap.lnglatToArrStr(bounds.getSouthWest());
+    }
+
+    //绑定按钮事件
+    document.querySelector("#reset-bounds").onclick = function () {
+        //通过 new CMMap.Bounds(southWest:LngLat, northEast:LngLat) 或者 map.getBounds() 获得地图Bounds信息
+        var mybounds = new CMMap.Bounds([116.319665, 39.855919], [116.468324, 39.9756]);
+        map.setBounds(mybounds);
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+</script>
+</body>
+
+</html>

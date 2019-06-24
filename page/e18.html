@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>获取某个覆盖物</title>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        .input-card{
+            position: absolute;
+            bottom: 15px;
+        }
+    </style>
+</head>
+<body >
+<div id="container"></div>
+<div class="input-card">
+    <input id="getAllOverlays" type="button" class="btn" value="获取 id 为 2 覆盖物"/>
+</div>
+<script type="text/javascript" src="../js/JSWrap.js"></script>
+<script type="text/javascript">
+    // 创建地图实例
+    function initMap() {
+        var map = new CMMap.Map("container", {
+            zoom: 13,
+            center: [116.43, 39.92],
+            resizeEnable: true
+        });
+
+        var lnglats = [[116.39, 39.92], [116.41, 39.93], [116.43, 39.91], [116.46, 39.93]];
+        var markers = [];
+
+        for (var i = 0; i < lnglats.length; i++) {
+            var lnglat = lnglats[i];
+            // 创建点实例
+            var marker = new CMMap.Marker({
+                map:map,
+                position: new CMMap.LngLat(lnglat[0], lnglat[1]),
+                icon: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(i+1)+'.png',
+                extData:{
+                    id: i + 1
+                }
+            });
+            markers.push(marker);
+            map.on("complete",function () {
+                map.setFitView(null,2);
+            });
+        }
+
+        // var infoWindow = new CMMap.InfoWindow({
+        //        offset: new CMMap.Pixel(-2, -20),
+        //        content: '<div>已获取 id 为 2 覆盖物</div>'
+        //    });
+
+        // 获取当前 id 的覆盖物
+        function getOneOverlay() {
+            var targetId = 2;
+            var targetMarker;
+
+            for(var i = 0; i < markers.length; i++){
+                // 获取存在每个 extData 中的 id
+                var id = markers[i].getExtData().id;
+
+                if(id === targetId){
+                    targetMarker = markers[i];
+                    break;
+                }
+            }
+
+            var position = targetMarker.getPosition();
+
+            var infoWindow = new CMMap.InfoWindow({
+                offset: new CMMap.Pixel(-2, -20),
+                content: '<div>已获取 id 为 2 覆盖物</div>'
+            });
+
+            infoWindow.open(map,position);
+        }
+
+        // 绑定获取覆盖物事件
+        document.getElementById("getAllOverlays").onclick = getOneOverlay;
+    }
+
+    if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>地标POI点击事件</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+		<script>
+			var map;
+
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {zoom: 13});
+                var data_info = [
+                    [116.417854, 39.921988, "地址：北京市东城区王府井大街88号乐天银泰百货八层"],
+                    [116.406605, 39.921585, "地址：北京市东城区东华门大街"],
+                    [116.412222, 39.912345, "地址：北京市东城区正义路甲5号"]
+                ];
+
+                for(var i = 0; i < data_info.length; i++) {
+                    var marker = new CMMap.Marker({
+                        position: new CMMap.LngLat(data_info[i][0], data_info[i][1]),
+                        offset: new CMMap.Pixel(0, 0),
+                        clickable: true
+                    });
+                    marker.setMap(map);
+                    var content = data_info[i][2];
+                    addClickHandler(content, marker);
+                }
+				map.on("complete", function () {
+                    map.setFitView(null,2);
+                });
+			}
+
+			function addClickHandler(content, marker) {
+				marker.on("click", function(e) {
+					alert(content + "\n位置：" + marker.getPosition());
+				});
+			}
+	if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+		</script>
+	</head>
+
+	<body >
+		
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

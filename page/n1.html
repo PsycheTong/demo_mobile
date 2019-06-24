@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>地址解析</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script language="javascript" src="http://223.100.246.29:9091/SDKService/jssdk/auth?v=1.0&key=5592f4830d22caccc27546e61faf9048"></script>
+		<!--引入CMMap JavaScript 地理编码库 -->
+		<script type="text/javascript" src="/CMMapDemo/js/CMMap.Geocode.js"></script>
+		<script>
+			var map;
+			var marker;
+			
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {
+					view: {
+						center: {
+							lng: 123.45313434,
+							lat: 41.72357488
+						},
+						zoom: 13,
+						rotation: 0
+					},
+
+				});
+
+				map.plugin(["CMMap.OverLay"], function() {
+					geocode();
+				});
+
+			}
+
+			//地理编码部分说明
+			function geocode() {
+				//第一步声明地理编码的回调函数
+				// 参数: result 为回调函数返回的结果
+				var result;
+				var userCallback = function(result) {
+
+					var myStatus = result.getStatus(); //获取返回状态
+					var myInfo = result.getInfo(); //获取返回信息
+
+					var myGeocode = result.getGeocode(); //获取返回GeoCode对象
+					var myGeocode_location = myGeocode.getLocation(); //获取GeoCode的location信息
+
+					addMarker(myGeocode_location.getLng(),myGeocode_location.getLat());
+				};
+				//第二步:创建 地理服务参数对象 param 并设置对象的相关参数
+				var param = new CMMap.Geocode.GeoParam();
+				//设置 地理服务参数对象的查询地址及限定城市
+				param.setAddress("辽宁省沈阳市东陵区新隆街6号");
+				param.setCity("沈阳市");
+				//第三步:新建地理服务对象,
+				//  参数:第一参数 表示 地理服务用户key 可通过直接填写key 字符串或 或 指定为CMMap.Conf._key
+				//       第二参数 表示地理服务的http 请求地址以及端口号
+				var map = new CMMap.Geocode.GeoCoder("4w844xhajnxng1m846w3rxv7fr83jt5y", "http://211.137.35.37:2234");
+				// 第四步 调用地理服务查询函数进行查询   【注意，下面调用如果使用userCallback函数名，必须在前边已定义该函数。当然，也可以直接将userCallback函数定义写在下面的函数调用中。】
+				map.getLocation(param, userCallback);
+				return result;
+			}
+			
+			//添加点
+			function addMarker(lng,lat) {
+				marker = new CMMap.Marker({
+					map: map,
+					position: new CMMap.LngLat(lng,lat),
+					offset: new CMMap.Pixel(0, 0),
+					clickable: true,
+					draggable: false
+				});
+			};
+		</script>
+	</head>
+
+	<body onload="mapInit();">
+		<div id="mapContainer" style="position: relative;"></div>
+	</body>
+
+</html>

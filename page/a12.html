@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>自适应显示多个点标记</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .amap-icon img{
+            width: 25px;
+            height: 34px;
+        }
+    </style>
+</head>
+<body >
+<div id="container"></div>
+
+<div class="input-card">
+    <h4>地图自适应</h4>
+    <input id="setFitView" type="button" class="btn" value="地图自适应显示" />
+</div>
+<div class="info">
+    <div id="centerCoord"></div>
+    <div id="zoom"></div>
+    <div id="bounds"></div>
+    <div id="tips"></div>
+</div>
+
+<script type="text/javascript" src="../js/JSWrap.js"></script>
+<script type="text/javascript">
+    var map = null;
+    var bIsFit = false;
+    function initMap() {
+         map = new CMMap.Map('container', {
+            resizeEnable: true,
+            center: [116.397428, 39.90923],
+            zoom: 13
+        });
+        map.clearMap();  // 清除地图覆盖物
+        map.on('zoomend',function(){
+            update(bIsFit);
+        });
+        // 添加一些分布不均的点到地图上,地图上添加三个点标记，作为参照
+        markers.forEach(function(marker) {
+            new CMMap.Marker({
+                map: map,
+                icon: marker.icon,
+                position: [marker.position[0], marker.position[1]],
+                // offset: new CMMap.Pixel(-13, -30)
+            });
+        });
+        update(bIsFit)
+        // 添加事件监听, 使地图自适应显示到合适的范围
+        CMMap.event.addDomListener(document.getElementById('setFitView'), 'click', function() {
+            var newCenter = map.setFitView(map.getAllOverlays(),1.5);
+            bIsFit = true;
+        });
+    };
+    function update(bIsFit) {
+        var center = map.getCenter();
+
+        var centerText = '当前中心点坐标：' + JSWrap.lnglatToArrStr(center);
+        var zoomText = '当前zoom:' + map.getZoom();
+        var infoText = '成功添加三个点标记，其中有两个在当前地图视野外！';
+        var boundsText = '当前显示区域: ' + JSWrap.lnglatToArrStr(map.getBounds().southWest) + ", " +  JSWrap.lnglatToArrStr(map.getBounds().northEast);
+        if(bIsFit){
+            infoText = '通过setFitView，地图自适应显示到合适的范围内,点标记已全部显示在视野中！';
+        }
+        document.getElementById('centerCoord').innerHTML = centerText;
+        document.getElementById('zoom').innerHTML = zoomText;
+        document.getElementById('bounds').innerHTML = boundsText;
+        document.getElementById('tips').innerHTML = infoText;
+    };
+
+    var markers = [{
+        icon: 'http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png',
+        position: [116.397428, 39.90923]
+    }, {
+        icon: 'http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png',
+        position: [116.368904, 39.913423]
+    }, {
+        icon: 'http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png',
+        position: [116.305467, 39.807761]
+    }];
+
+     if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+</script>
+</body>
+</html>

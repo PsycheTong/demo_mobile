@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>带功能控件的地图</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css" />
+    
+    <style>
+        html, body {
+            height: 100%;
+        }
+        #container {
+            height: 100%;
+            overflow: hidden;
+        }
+        .input-card {
+            width: 150px;
+            top: 10px;
+            bottom: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div class='input-card'>
+    
+    <div class="input-item">
+        <input type="checkbox" id="overview" checked onclick="toggleOverViewShow(this)"/>显示鹰眼
+    </div>
+    
+    <div class="input-item">
+        <input type="checkbox" id="overviewOpen"  onclick="toggleOverViewOpen(this)"/>展开鹰眼
+    </div>
+</div>
+<script>
+ var scale,toolBar,overView,map;
+function mapInit() {
+    scale = new CMMap.Scale(),
+    toolBar = new CMMap.ToolBar({
+        visible: false
+    }),
+    overView = new CMMap.OverView(),
+    map = new CMMap.Map("container", {
+        resizeEnable: true
+    });
+    map.addControl(scale);
+    map.addControl(toolBar);
+    map.addControl(overView);
+
+ 
+}   
+
+   function toggleOverViewShow(checkbox) {
+        if (checkbox.checked) {
+            overView.show();
+            document.getElementById('overviewOpen').disabled = false;
+        } else {
+            overView.hide();
+            document.getElementById('overviewOpen').disabled = true;
+        }
+    }
+    function toggleOverViewOpen(checkbox) {
+        if (checkbox.checked) {
+            overView.open();
+        }
+        else {
+            overView.close();
+        }
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+</script>
+</body>
+</html>

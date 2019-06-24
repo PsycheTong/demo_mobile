@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>普通地图、高精度地图</title>
+  <link rel="stylesheet" href="../css/demo-center.css"/>
+  <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body >
+  <div id="container"></div>
+  <div class="input-card" style="width: auto;">
+        <div class="input-item">
+        <button class="btn" onclick="toggle()">显示高精度地图</button>
+    </div>
+</div>
+
+  <script type="text/javascript" src="../js/JSWrap.js"></script>
+
+  <script>
+    //创建地图
+    var map;
+    function mapInit(){
+      map = new CMMap.Map('container', {
+            resizeEnable: true,
+            zoom: 11,
+            center: [116.405285, 39.904989]
+          });  
+    }
+    function toggle(){
+      map.setZoomAndCenter(16,[122.995753,41.109434]);
+     
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+  </script>
+</body>
+
+</html>

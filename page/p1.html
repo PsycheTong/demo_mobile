@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>根据起终点名称规划步行线路</title>
+		<link rel="stylesheet" href="/CMMapDemo/css/infoWindow.css" />
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script language="javascript" src="http://223.100.246.29:9091/SDKService/jssdk/auth?v=1.1&key=5592f4830d22caccc27546e61faf9048"></script>
+		<script>
+			var map;
+			var allPoints = [];
+			var infoWindow;
+			var epolyline;
+			var se = [];
+
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {
+					view: {
+						center: {
+							lng: 116.404,
+							lat: 39.915
+						},
+						zoom: 11,
+						rotation: 0
+					},
+					zooms: [3, 18],
+					cursor: "default",
+					animateEnable: true,
+					rotateEnable: false,
+					resizeEnable: false,
+					dragEnable: true,
+					zoomEnable: true,
+					doubleClickZoom: true,
+					keyboardEnable: true,
+					jogEnable: true,
+					scrollWheel: true,
+					touchZoom: true
+
+				});
+				walkSearch();
+			}
+
+			function walkSearch() {
+				if(se != null) {
+					for(var i = 0; i < se.length; i++) {
+						se[i].setMap(null);
+					}
+
+				}
+				if(epolyline != undefined) {
+					epolyline.setMap(null);
+				}
+
+				map.plugin(["CMMap.OverLay"], function() {
+					//起点选择
+					map.plugin('CMMap.PoiSearch', function() {
+						var s = new CMMap.PoiSearch.PoiByKeywords({
+							keywords: '天坛公园',
+							city: '110100'
+						});
+						s.search(function(status, result) {
+							if(status != 'complete') {
+								alert('调用失败！错误信息：' + (result || '（空）'));
+								return;
+							}
+
+							var pois = result.pois;
+							if(pois) {
+								for(var i = 0; i < pois.length; ++i) {
+									var poi = pois[i];
+									marker = new CMMap.Marker({
+										map: map,
+										position: new CMMap.LngLat(poi.X, poi.Y),
+										offset: new CMMap.Pixel(0, 0),
+										clickable: true,
+										draggable: false,
+										icon: "/CMMapDemo/img/mark_r" + (i + 1) + ".png"
+									});
+									addMouseoverHandler(poi, marker);
+									allPoints.push(marker);
+									
+									if (i == 0) {
+										var info = [];
+										info.push("<div><div style=\"padding:0px 0px 0px 4px;\"><b style=\"color: #cc5522\">" + pois[0].NAME + "</b>");
+										info.push("<input type=\"button\" id=\"endPoint\" value=\"选为起点\" onclick=\"endPointSearch(" + poi.X + ", " + poi.Y + ");\"");
+										info.push("</div></div>");
+										infoWindow = new CMMap.InfoWindow({
+											content: info.join("<br/>"),
+											size: new CMMap.Size(200, 100),
+											closeWhenClickMap: true,
+											offset: new CMMap.Pixel(0, 0),
+											autoMove: true
+										});
+										infoWindow.open(map, marker.getPosition());
+									}
+									
+								}
+							}
+						});
+					});
+
+				});
+			}
+
+			function endPointSearch(lng, lat) {
+				infoWindow.close();
+				for(var k = 0; k < allPoints.length; k++) {
+					allPoints[k].setMap(null);
+				}
+				//终点选择
+				map.plugin('CMMap.PoiSearch', function() {
+					var e = new CMMap.PoiSearch.PoiByKeywords({
+						keywords: '故宫',
+						city: '110100'
+					});
+					e.search(function(status, result) {
+						if(status != 'complete') {
+							alert('调用失败！错误信息：' + (result || '（空）'));
+							return;
+						}
+
+						var pois = result.pois;
+						if(pois) {
+							for(var i = 0; i < pois.length; ++i) {
+								var poi = pois[i];
+								marker = new CMMap.Marker({
+									map: map,
+									position: new CMMap.LngLat(poi.X, poi.Y),
+									offset: new CMMap.Pixel(0, 0),
+									clickable: true,
+									draggable: false,
+									icon: "/CMMapDemo/img/mark_r" + (i + 1) + ".png"
+								});
+								addMouseoverHandlerEnd(poi, marker, lng, lat);
+								allPoints.push(marker);
+							}
+							var info = [];
+							info.push("<div><div style=\"padding:0px 0px 0px 4px;\"><b style=\"color: #cc5522\">" + pois[0].NAME + "</b>");
+							info.push("<input type=\"button\" id=\"endPoint\" value=\"选为终点\" onclick=\"drawLine(" + lng + "," + lat + "," + poi.X + "," + poi.Y + ");\"");
+							info.push("</div></div>");
+							infoWindow = new CMMap.InfoWindow({
+								content: info.join("<br/>"),
+								size: new CMMap.Size(200, 100),
+								closeWhenClickMap: true,
+								offset: new CMMap.Pixel(0, 0),
+								autoMove: true
+							});
+							infoWindow.open(map, marker.getPosition());
+						}
+					});
+				});
+			}
+
+			function drawLine(sLng, sLat, eLng, eLat) {
+				var flag = false;
+				infoWindow.close();
+				for(var k = 0; k < allPoints.length; k++) {
+					allPoints[k].setMap(null);
+				}
+				map.plugin(["CMMap.RouteSearch"], function() {
+					var s = new CMMap.RouteSearch.Walk({
+						origin: new CMMap.LngLat(sLng,sLat),
+						destination: new CMMap.LngLat(eLng,eLat)
+					});
+
+					s.search(function(status, result) {
+						if(status != 'complete') {
+							alert(['Error: ', status, result]);
+						} else {
+							var path = [];
+							for(var i = 0; i < result.routes.length; ++i) {
+								var r = result.routes[i];
+								var endlg;
+								var endlat;
+								for(var j = 0; j < r['steps'].length; j++) {
+									var step = r.steps[j];
+									for (var k=0;k<step['coordinates'].length;k++) {
+										var ll = step.coordinates[k];
+										var temp = [ll.lon,ll.lat];
+										path.push(temp);
+										if (j == 0 && k == 0) {
+											createPoint(ll.lon,ll.lat,"/CMMapDemo/img/start.gif");
+										}
+										endLg = ll.lon;
+										endlat = ll.lat;
+									}
+								}
+								createPoint(endLg,endlat,"/CMMapDemo/img/end.gif");
+							}
+							epolyline = new CMMap.Polyline({
+								map: map,
+								path: path, //设置线覆盖物路径 
+								strokeColor: "#00DD00", //线颜色 
+								strokeWeight: 5, //线宽 
+								isOutline: true,
+								outlineColor: "#00DD00",
+								strokeStyle: "solid" //线样式 
+							});
+						}
+					});
+				});
+				map.setZoom(11);
+				map.setZoom(13);
+				infoWindow.close();
+			}
+
+			//鼠标滑过选择起点
+			function addMouseoverHandler(poi, marker) {
+				marker.addListener(marker, "mouseover", function(e) {
+					//构建信息窗体中显示的内容
+					var info = [];
+					info.push("<div><div style=\"padding:0px 0px 0px 4px;\"><b style=\"color: #cc5522\">" + poi.NAME + "</b>");
+					info.push("<input type=\"button\" id=\"endPoint\" value=\"选为起点\" onclick=\"endPointSearch(" + poi.X + ", " + poi.Y + ");\"");
+					info.push("</div></div>");
+					var infoWindow = new CMMap.InfoWindow({
+						content: info.join("<br/>"),
+						size: new CMMap.Size(200, 100),
+						closeWhenClickMap: true,
+						offset: new CMMap.Pixel(0, 0),
+						autoMove: true
+					});
+					infoWindow.open(map, marker.getPosition());
+				});
+			}
+
+			//鼠标滑过选择终点
+			function addMouseoverHandlerEnd(poi, marker, lng, lat) {
+				marker.addListener(marker, "mouseover", function(e) {
+					//构建信息窗体中显示的内容
+					var info = [];
+					info.push("<div><div style=\"padding:0px 0px 0px 4px;\"><b style=\"color: #cc5522\">" + poi.NAME + "</b>");
+					info.push("<input type=\"button\" id=\"endPoint\" value=\"选为终点\" onclick=\"drawLine(" + lng + "," + lat + "," + poi.X + "," + poi.Y + ");\"");
+					info.push("</div></div>");
+					alert(poi.X + ", " + poi.Y);
+					var infoWindow = new CMMap.InfoWindow({
+						content: info.join("<br/>"),
+						size: new CMMap.Size(200, 100),
+						closeWhenClickMap: true,
+						closeWhenDragMap:true,
+						offset: new CMMap.Pixel(0, 0),
+						autoMove: true
+					});
+					infoWindow.open(map, marker.getPosition());
+				});
+			}
+
+			/**
+			 * 创建点
+			 * @param {Object} lng
+			 * @param {Object} lat
+			 * @param {Object} imgurl
+			 */
+			function createPoint(lng, lat, imgurl) {
+				marker = new CMMap.Marker({
+					map: map,
+					position: new CMMap.LngLat(lng, lat),
+					offset: new CMMap.Pixel(0, 0),
+					clickable: true,
+					draggable: false,
+					icon: imgurl
+				});
+				se.push(marker);
+			}
+		</script>
+	</head>
+
+	<body onload="mapInit();">
+		<div id="mapContainer" style="position: relative;"></div>
+	</body>
+
+</html>

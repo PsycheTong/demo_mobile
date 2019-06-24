@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/positionPicker.html -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>鼠标／触摸操作事件</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+    }
+    
+    .map {
+        height: 100%;
+        width: 100%;
+        float: left;
+    }
+    
+    #right {
+        color: #444;
+        background-color: #f8f8f8;
+        width: 40%;
+        float: left;
+        height: 100%;
+    }
+    
+    #start,
+    #stop,
+    #right input {
+        margin: 4px;
+        margin-left: 15px;
+    }
+    
+    .title {
+        width: 100%;
+        background-color: #dadada
+    }
+    
+    button {
+        border: solid 1px;
+        margin-left: 15px;
+        background-color: #dadafa;
+    }
+    
+    .c {
+        font-weight: 600;
+        padding-left: 15px;
+        padding-top: 4px;
+    }
+    
+    #lnglat,
+    #address,
+    #nearestJunction,
+    #nearestRoad,
+    #nearestPOI,
+    .title {
+        padding-left: 15px;
+    }
+    </style>
+</head>
+
+<body >
+    <div id="container" class="map" tabindex="0"></div>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+     <!--<script type="text/javascript" src="../js/bundle.js"></script>-->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <script type="text/javascript">
+    function mapInit(){
+                var map = new CMMap.Map('container', {
+            zoom: 16
+        });
+            }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+    </script>
+</body>
+
+</html>

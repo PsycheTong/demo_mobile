@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>矩形的中心点</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css" />
+    <style>
+      html,body,#container{
+        height: 100%
+      }
+    </style>
+</head>
+<body >
+<div id="container"></div>
+  <div class="info">
+    <h4>矩形中心点</h4>
+    <p>中心点：<span id="center"></span></p>
+  </div>
+<script type="text/javascript">
+    function initMap() {
+        //初始化地图对象，加载地图
+        var map = new CMMap.Map("container", {
+            resizeEnable: true,
+            zoom: 6
+        });
+        var minLng = 116.150625,maxLng = 116.70638,minLat = 39.70992,maxLat = 40.129961;
+        var bounds = new CMMap.Bounds([minLng,minLat],[maxLng,maxLat]);
+        var polygon = new CMMap.Polygon({
+            map: map,
+            fillOpacity:0.4,
+            path: [
+                [minLng,minLat],
+                [maxLng,minLat],
+                [maxLng,maxLat],
+                [minLng,maxLat]
+            ]
+        });
+        function compute(){
+            var center = CMMap.GeometryUtil.getCenterFromRectange(bounds);
+
+            document.querySelector("#center").innerText = JSWrap.lnglatToStr(center);
+        }
+        compute();
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", initMap);//IE
+    } else {
+        window.addEventListener("load", initMap, false);//FF
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<link rel="stylesheet" href="../css/infoWindow.css" />
+		<title>添加纯文字的信息窗口</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+		<script>
+			var map;
+
+			function mapInit() {
+				map =   new CMMap.Map("mapContainer", {center: new CMMap.LngLat(116.397428, 39.90923),zoom:13});
+
+				var marker = new CMMap.Marker({
+						position: new CMMap.LngLat(116.397428, 39.90923)
+					});
+					marker.setMap(map);
+
+
+					//构建信息窗体中显示的内容
+					var info = [];
+					info.push("<div>这是纯文字信息示例</div>");
+					var infoWindow = new CMMap.InfoWindow({
+						content: info.join("<br/>"),
+						 offset: new CMMap.Pixel(0, -20)
+					});
+
+					marker.on("click", function(e) {
+					    console.log(marker.getPosition());
+						infoWindow.open(map, marker.getPosition());
+					});
+			}
+	if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+		</script>
+	</head>
+
+	<body >
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

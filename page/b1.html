@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>添加/删除工具条、比例尺控件</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+		<link rel="stylesheet" href="../css/demo-center.css"/>
+		<script>
+			var map;
+			var toolBarFlag = false;
+			var scaleFlag = false;
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {
+					zoom: 10, rotation: 0 
+				});
+
+				//在地图中添加ToolBar插件
+				map.plugin(["CMMap.ToolBar"], function() {
+					toolBar = new CMMap.ToolBar();
+				});
+				//加载比例尺插件
+				map.plugin(["CMMap.Scale"], function() {
+					scale = new CMMap.Scale();
+				});
+
+			}
+
+			function add() {
+				
+				if(!toolBarFlag)
+				{
+					map.addControl(toolBar);
+					toolBarFlag = true;
+				}
+				
+				if(!scaleFlag)
+				{
+					map.addControl(scale);
+					scaleFlag = true;
+				}
+
+			}
+
+			function remove() {
+				map.removeControl(toolBar);
+				toolBarFlag = false;
+			
+				map.removeControl(scale);
+				scaleFlag = false;
+			}
+			if (window.attachEvent) {
+		      window.attachEvent("onload", mapInit);//IE
+		    } else {
+		        window.addEventListener("load", mapInit, false);//FF
+		    }
+		</script>
+	</head>
+
+	<body >
+		<div style="position:absolute;top:10px;z-index:10;right:10px;">
+				<button onclick="add();" style="float: left;">添加工具条和比例尺</button>
+				<button onclick="remove()" style="float: left;">移除工具条和比例尺</button>
+		</div>
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

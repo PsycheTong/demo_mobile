@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>判断两个像素坐标点是否相等</title>
+		<script type="text/javascript" src="../js/JSWrap.js"></script>
+    	<link rel="stylesheet" href="../css/demo-center.css" />
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body >
+	<div id="mapContainer" style="position: relative;"></div>
+	<div class='info'>
+		<h4>两个点像素坐标是否相等</h4>
+		<div id='result'></div>
+	</div>
+	<div class="input-card">
+		<label style='color:grey'>输入一个点</label>
+		<input id='lnglat1' type="text" value="100,200">
+		<label style='color:grey'>输入另一个点</label>
+		<input id='lnglat2' type="text" value="100,200">
+		<div>
+			<input id="test" type="button" class="btn" value="比较" />
+		</div>
+	</div>
+</body>
+<script>
+	var map;
+	function mapInit() {
+		map = new CMMap.Map("mapContainer", {
+			center: [116.404,39.915]
+		});
+	checkResult();
+    document.getElementById("test").onclick = checkResult;
+	}
+	var $ = function(elementId){
+		return document.getElementById(elementId);
+	};
+	var lblnglat1 = $('lnglat1');
+	var lblnglat2 = $('lnglat2');
+	function checkResult(){
+        var lnglat1Val = lblnglat1.value.split(',');
+        var lnglat2Val = lblnglat2.value.split(',');
+		var ret = CMMap.GeometryUtil.lnglatCompare(lnglat1Val, lnglat2Val);
+		
+		document.querySelector("#result").innerText = ret ? "相等" : "不相等";
+  }
+
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/positionPicker.html -->
+    <meta charset="utf-8">
+    <meta name="isui" content="true" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>海量图形展示</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+    }
+    
+    .map {
+        height: 100%;
+        width: 100%;
+        float: left;
+    }
+    
+    #right {
+        color: #444;
+        background-color: #f8f8f8;
+        width: 40%;
+        float: left;
+        height: 100%;
+    }
+    
+    #start,
+    #stop,
+    #right input {
+        margin: 4px;
+        margin-left: 15px;
+    }
+    
+    .title {
+        width: 100%;
+        background-color: #dadada
+    }
+    
+    button {
+        border: solid 1px;
+        margin-left: 15px;
+        background-color: #dadafa;
+    }
+    
+    .c {
+        font-weight: 600;
+        padding-left: 15px;
+        padding-top: 4px;
+    }
+    
+    #lnglat,
+    #address,
+    #nearestJunction,
+    #nearestRoad,
+    #nearestPOI,
+    .title {
+        padding-left: 15px;
+    }
+    </style>
+</head>
+
+<body >
+    <div id="container" class="map" tabindex="0"></div>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <script type="text/javascript">
+
+function mapInit(){
+    var mapOptions = {
+        zoom:3};
+    var map = new CMMap.Map("container", mapOptions);
+
+    // if (!CMMap.PointSimplifier.supportCanvas) {
+    //     alert('当前环境不支持 Canvas！');
+    //     ;
+    // }
+    loadUIScript(function(){
+            var defaultRenderOptions = {
+        drawQuadTree: true,
+        drawPositionPoint: true,
+        drawShadowPoint: true,
+        //点
+        pointStyle: {
+            content: 'circle',
+            width: 6,
+            height: 6,
+            fillStyle: '#1f77b4',
+            lineWidth: 1,
+            strokeStyle: 'rgba(0,0,0,0)'
+        },
+    };
+
+    var shapeIns = new PolygonSimplifierLayer({
+        map: map, //所属的地图实例
+        // autoSetFitView: 0,
+        // renderOptions: defaultRenderOptions
+    });
+    window.ins = shapeIns;
+    var $ = PolygonSimplifierLayer.utils.$;
+
+
+
+    // $('<div id="loadingTip">加载数据，请稍候...</div>').appendTo(document.body);
+
+      $.ajax({
+                type: "POST",//请求方式
+                url: sourceUrl.testShapeDat,//地址，就是json文件的请求路径
+                dataType: "json",//数据类型可以为 text xml json  script  jsonp
+　　　　　　　　　 success: function(dat){//返回的参数就是 action里面所有的有get和set方法的参数
+                    var data = dat['features'];
+                    var dataSource = {
+                        getLnglatObj : function(idx) {
+                            // var ADMINCODE = data[idx]['properties']['ADMINCODE'];
+                            // if (ADMINCODE != '420325')
+                            //     return null;
+                            var geoarr = data[idx]['geometry']['coordinates'];
+                            // console.log(geoarr);
+                            return geoarr[0];
+                        },
+                        dataLength : function() {
+                            return !data ? 0 : data.length;
+                        },
+                    };
+                    // console.log(data);
+                    shapeIns.setDataSource(dataSource);
+                }
+            });
+    });
+    
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+    </script>
+</body>
+
+</html>

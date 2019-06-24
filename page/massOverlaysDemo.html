@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+		<title>大量覆盖物演示</title>
+
+		<style type="text/css">
+			body {
+				position: absolute;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#mapContainer {
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				float: left;
+			}
+		</style>
+		<script language="javascript" src="http://223.100.246.29:9091/SDKService/jssdk/auth?v=1.0&key=5592f4830d22caccc27546e61faf9048"></script>
+		<script>
+			var map;
+
+			var markerArr = [];
+			var cricleArr = [];
+			var polylineArr = [];
+			var polygonArr = [];
+
+			function mapInit() {
+				map = new CMMap.Map("mapContainer", {
+					view: {
+						center: {
+							lng: 116.397428,
+							lat: 39.90923
+						},
+						zoom: 13,
+						dragEnable: true,
+						rotation: 0
+					},
+
+				});
+				map.plugin(["CMMap.OverLay"], function() {
+					var bounds = map.getBounds();
+					var sw = bounds.getSouthWest();
+					var ne = bounds.getNorthEast();
+					var lngSpan = Math.abs(sw.lng - ne.lng);
+					var latSpan = Math.abs(ne.lat - sw.lat);
+
+					for(var i = 0; i < 100; i++) {
+						var marker = new CMMap.Marker({
+							position: new CMMap.LngLat(sw.lng + lngSpan * (Math.random() * 0.9), ne.lat - latSpan * (Math.random() * 0.9)),
+							offset: new CMMap.Pixel(0, 0),
+							clickable: true,
+							draggable: true,
+							title: "marker" + (i + 1)
+						});
+						marker.setMap(map);
+						markerArr.push(marker);
+					}
+
+					for(var i = 0; i < 100; i++) {
+						var circle = new CMMap.Circle({
+							center: new CMMap.LngLat(sw.lng + lngSpan * (Math.random() * 0.9), ne.lat - latSpan * (Math.random() * 0.9)), // 圆心位置
+							radius: 150, //半径
+							strokeColor: "#F33", //线颜色
+							strokeOpacity: 1, //线透明度
+							strokeWeight: 3, //线粗细度
+							fillColor: "#ee2200", //填充颜色
+							fillOpacity: 0.35 //填充透明度
+						});
+						circle.setMap(map);
+						cricleArr.push(circle);
+					}
+
+					for(var i = 0; i < 100; i++) {
+						var lngInit = sw.lng + lngSpan * (Math.random() * 0.9);
+						var latInit = ne.lat - latSpan * (Math.random() * 0.9);
+						var gonArr = [{
+								lng: lngInit,
+								lat: latInit
+							},
+							{
+								lng: lngInit + 0.005,
+								lat: latInit
+							},
+							{
+								lng: lngInit + 0.005,
+								lat: latInit + 0.005
+							},
+							{
+								lng: lngInit,
+								lat: latInit + 0.005
+							}
+						];
+						var polygon = new CMMap.Polygon({
+							path: gonArr, //设置线覆盖物路径
+							strokeColor: "#FF33FF", //线颜色
+							strokeOpacity: 0.1, //线透明度
+							strokeWeight: 3, //线宽
+							fillColor: "#FF91fc", //填充色
+							fillOpacity: 1 //填充透明度
+						});
+						polygon.setMap(map);
+						polygonArr.push(polygon);
+					}
+
+					for(var i = 0; i < 100; i++) {
+						var lngInit = sw.lng + lngSpan * (Math.random() * 0.9);
+						var latInit = ne.lat - latSpan * (Math.random() * 0.9);
+
+						var lineArr = [
+							[lngInit, latInit],
+							[lngInit + 0.01, latInit + 0.01]
+						];
+
+						var polyline = new CMMap.Polyline({
+							path: lineArr, // 设置线覆盖物路径
+							isArrow: true,
+							strokeColor: '#3366FF', // 线颜色
+							strokeOpacity: 1, // 线透明度
+							strokeWeight: 2, // 线宽
+							strokeStyle: 'solid', // 线样式
+							strokeDasharray: [10, 5, 10] // 补充线样式
+						});
+						polyline.setMap(map);
+						polylineArr.push(polyline);
+					}
+
+				});
+
+				map.addListener(map, "mousewheel", function(e) {
+
+					if(map.getZoom() > 13) {
+						for(var i = markerArr.length - 1; i >= 0; i--) {
+							markerArr[i].hide();
+						}
+					}
+					if(map.getZoom() > 14) {
+						for(var i = cricleArr.length - 1; i >= 0; i--) {
+							cricleArr[i].hide();
+						}
+					}
+					if(map.getZoom() > 15) {
+						for(var i = polygonArr.length - 1; i >= 0; i--) {
+							polygonArr[i].hide();
+						}
+					}
+					if(map.getZoom() > 16) {
+						for(var i = polylineArr.length - 1; i >= 0; i--) {
+							polylineArr[i].hide();
+						}
+					}
+					if(map.getZoom() <= 13) {
+						for(var i = markerArr.length - 1; i >= 0; i--) {
+							markerArr[i].show();
+						}
+					}
+					if(map.getZoom() <= 14) {
+						for(var i = cricleArr.length - 1; i >= 0; i--) {
+							cricleArr[i].show();
+						}
+					}
+					if(map.getZoom() <= 15) {
+						for(var i = polygonArr.length - 1; i >= 0; i--) {
+							polygonArr[i].show();
+						}
+					}
+					if(map.getZoom() <= 16) {
+						for(var i = polylineArr.length - 1; i >= 0; i--) {
+							polylineArr[i].show();
+						}
+					}
+				});
+			}
+
+			function overlaySum() {
+				alert("当前地图级别:" + map.getZoom() +" 点:" + markerArr.length + " 圆:" + cricleArr.length + " 面:" + polygonArr.length + " 线:" + polylineArr.length);
+			}
+
+		</script>
+	</head>
+
+	<body onload="mapInit();">
+		<input type="button" value="覆盖物数量" onclick="overlaySum();">
+		<div id="mapContainer" style="position: relative;"></div>
+
+	</body>
+
+</html>

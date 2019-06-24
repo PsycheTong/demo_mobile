@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>放大某个矩形使其包含给定的点</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css" />
+    <style>
+      html,body,#container{
+        height: 100%
+      }
+    </style>
+</head>
+<body >
+<div id="container"></div>
+<div class='info'>
+    <p>放大后矩形:</p>
+    <p>southWest:<span id="sw"></span></p>
+    <p>northEast:<span id="ne"></span></p>
+</div>
+
+
+
+<div class="input-card">
+    <label style='color:grey'>输入一个点</label>
+    <input id='lnglat' type="text" value="117.1,40.2">
+    <label style='color:grey'>输入一个矩形的范围：(经度,纬度)</label>
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >左下角经纬度</span>
+            </div>
+            <input id='lblnglat2' type="text" value="116.150625,39.72992">
+            
+    </div>
+    <div class="input-item">
+            <div class="input-item-prepend">
+                <span class="input-item-text" >右上角经纬度</span>
+            </div>
+            <input id='rtlnglat2' type="text" value="116.82638,40.149961">
+            
+    </div>
+    <div>
+        <input id="ret" type="button" class="btn" value="放大矩形" />
+    </div>
+</div>
+<script type="text/javascript">
+    //初始化地图对象，加载地图
+    var map ;
+    function mapInit(){
+        map = new CMMap.Map("container", {
+            resizeEnable: true,
+            zoom: 6
+        });
+        checkContains();
+    }
+    var $ = function(elementId){
+        return document.getElementById(elementId);
+    };
+    var lnglat = $('lnglat');
+    var lblnglat2 = $('lblnglat2');
+    var rtlnglat2 = $('rtlnglat2');
+ 
+  function checkContains(){
+        
+        var lnglat1Val = lnglat.value.split(',');
+
+        var lblnglat2Val = lblnglat2.value.split(',');
+        var lbLngLat2 = new CMMap.LngLat(parseFloat(lblnglat2Val[0]), parseFloat(lblnglat2Val[1]));
+        var rtlnglat2Val = rtlnglat2.value.split(',');
+        var rtLngLat2 = new CMMap.LngLat(parseFloat(rtlnglat2Val[0]), parseFloat(rtlnglat2Val[1]));
+
+        var bounds = new CMMap.Bounds(lbLngLat2,rtLngLat2);
+        CMMap.GeometryUtil.enlargeRectangelWithPoint(bounds,lnglat1Val);
+        document.querySelector("#sw").innerText = bounds.southWest;
+        document.querySelector("#ne").innerText = bounds.northEast;
+  }
+
+    document.getElementById("ret").onclick = checkContains;
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+</script>
+</body>
+</html>

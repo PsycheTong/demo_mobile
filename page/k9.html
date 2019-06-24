@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>获取矩形对角线坐标</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css" />
+    <style>
+      html,body,#container{
+        height: 100%
+      }
+    </style>
+</head>
+<body >
+<div id="container"></div>
+  <div class="info">
+    <h4>矩形对角线坐标</h4>
+    <p>左下角：<span id="left"></span></p>
+    <p>右上角：<span id="top"></span></p>
+  </div>
+<script type="text/javascript">
+    //初始化地图对象，加载地图
+    var map,bounds ;
+    var minLng = 116.150625,maxLng = 116.70638,minLat = 39.70992,maxLat = 40.129961;
+    function mapInit(){
+        map = new CMMap.Map("container", {
+          resizeEnable: true,
+          zoom: 6
+      });
+        bounds = new CMMap.Bounds([minLng,minLat],[maxLng,maxLat]);
+        var polygon = new CMMap.Polygon({
+          map: map,
+          fillOpacity:0.4,
+          path: [
+              [minLng,minLat],
+              [maxLng,minLat],
+              [maxLng,maxLat],
+              [minLng,maxLat]
+          ]
+      });
+         compute();
+    }
+
+ 
+   function compute(){
+        var lnglats = CMMap.GeometryUtil.DiagonalCoordinates(bounds);
+        document.querySelector("#left").innerText = lnglats[0];
+        document.querySelector("#top").innerText = lnglats[1];
+   }
+  
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+
+</script>
+</body>
+</html>

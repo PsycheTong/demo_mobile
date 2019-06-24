@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+    <title>获取地图显示范围</title>
+    <script type="text/javascript" src="../js/JSWrap.js"></script>
+    <link rel="stylesheet" href="../css/demo-center.css"/>
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lnglat {
+            color: #0288d1;
+        }
+    </style>
+</head>
+
+<body >
+<div id="container"></div>
+<div class="info">
+    <div id="input-card"></div>
+</div>
+<script>
+    function mapInit() {
+        //创建地图
+        var map = new CMMap.Map('container', {
+            zoom: 5,
+            center: [116.405285, 39.904989]
+        });
+        var infoText = function (bounds) {
+            return "当前显示范围:</br>" +
+                JSWrap.lnglatToArrStr(bounds.getSouthWest())
+                + ";</br>"
+                + JSWrap.lnglatToArrStr(bounds.getNorthEast());
+        }
+        map.on('complete', function () {
+            var bounds = map.getBounds();
+            // alert(bounds.getSouthWest().toString() +";" + bounds.getNorthEast().toString());
+            document.getElementById('input-card').innerHTML = infoText(bounds);
+        });
+        map.on('mapmove', function () {
+            var bounds = map.getBounds();
+            document.getElementById('input-card').innerHTML = infoText(bounds);
+        });
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", mapInit);//IE
+    } else {
+        window.addEventListener("load", mapInit, false);//FF
+    }
+
+</script>
+</body>
+
+</html>
