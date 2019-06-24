@@ -1,4 +1,4 @@
-﻿var isInt = 0;      //判断源码是否已经获取过，如果获取过，则直接显示当前页面源码，否则从服务器获取
+var isInt = 0;      //判断源码是否已经获取过，如果获取过，则直接显示当前页面源码，否则从服务器获取
 var isTab = 1;
 var myWidth = 0, myHeight = 0, isOpen = 0, isFull = 0;editor = null;//获取浏览器高度和宽度,高亮代码编辑器
 
@@ -93,7 +93,7 @@ function getresource(id){
         if (location.indexOf('index.html') > 0) {
             location = location.substr(0, location.indexOf('index.html'));
         }  
-    mylink = location += 'page/' + id + '.html';
+    mylink = location += '../page/' + id + '.html';
     var xmlHttp = createXmlHttpRequest();
     xmlHttp.open("get",mylink,false);
     xmlHttp.send();
