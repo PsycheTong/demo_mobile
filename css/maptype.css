@@ -1,0 +1,102 @@
+.amap-maptypecontrol {
+	z-index: 150;
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	z-index: 304
+}
+
+.amap-maptype-wrap {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 64px;
+	height: 64px
+}
+
+.amap-maptype-con {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 60px;
+	height: 60px;
+	background: #fff;
+	border: solid 1px #ccc;
+	cursor: pointer
+}
+
+.amap-maptype-win {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	width: 56px;
+	height: 56px;
+	overflow: hidden;
+	background: #ccc;
+	border: solid 1px #ccc
+}
+
+.amap-maptype-title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 60px;
+	height: 20px;
+	color: #333;
+	text-align: center;
+	font-size: 12px;
+	line-height: 20px;
+	background: #fff
+}
+
+.amap-maptype-title:hover {
+	background-color: #eee
+}
+
+.amap-maptype-list {
+	position: absolute;
+	top: 64px;
+	right: 0;
+	width: 100px;
+	background: #fff;
+	border: solid 1px #ccc;
+	overflow: hidden
+}
+
+.amap-maptype-list p {
+	width: 100px;
+	height: 20px;
+	margin: 0;
+	cursor: pointer;
+	background: #fff
+}
+
+.amap-maptype-lsit p:hover {
+	background: #eee
+}
+
+.amap-maptype-check {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-left: 2px;
+	background: url(https://webapi.amap.com/theme/v1.3/maptype-bg.png) no-repeat -30px 4px
+}
+
+.amap-maptype-checked {
+	background-position: 0 4px
+}
+
+.amap-maptype-check-hover {
+	background-position: -15px 4px
+}
+
+.amap-maptype-label {
+	display: inline-block;
+	width: 60px;
+	height: 15px;
+	color: #333;
+	font-size: 12px;
+	line-height: 15px;
+	margin-left: 10px
+}

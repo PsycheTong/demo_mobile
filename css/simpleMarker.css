@@ -1,0 +1,626 @@
+.amap-simple-marker-position-point {
+	position: absolute
+}
+
+.amap-simple-marker {
+	position: relative
+}
+
+.amap-simple-marker-label {
+	position: absolute;
+	text-align: center;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	font-size: 1em
+}
+
+.amap-simple-marker-icon {
+	font-size: 0
+}
+
+.amap-simple-marker-def-style .amap-simple-marker-label {
+	line-height: 35px
+}
+
+.amap-simple-marker-def-style .amap-simple-marker-icon,.amap-simple-marker.amap-simple-marker-def-style {
+	width: 35px;
+	height: 44px;
+	display: block;
+	text-align: center
+}
+
+.amap-simple-marker-def-style .amap-simple-marker-icon {
+	background: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/default/default-fs8.png) no-repeat;
+	background-position: -10000px -10000px
+}
+
+@media (min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3/2),(-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5),(min-resolution:1.5dppx) {
+	.amap-simple-marker-def-style .amap-simple-marker-icon {
+		background-image: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/default/default_2x-fs8.png);
+		background-size: 720px 46px
+	}
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-red .amap-simple-marker-icon {
+	background-position: 0 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-orange .amap-simple-marker-icon {
+	background-position: -36px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-green .amap-simple-marker-icon {
+	background-position: -72px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-blue .amap-simple-marker-icon {
+	background-position: -108px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-orchid .amap-simple-marker-icon {
+	background-position: -144px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-darkred .amap-simple-marker-icon {
+	background-position: -180px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-darkblue .amap-simple-marker-icon {
+	background-position: -216px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-darkgreen .amap-simple-marker-icon {
+	background-position: -252px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-purple .amap-simple-marker-icon {
+	background-position: -288px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-cadetblue .amap-simple-marker-icon {
+	background-position: -324px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-salmon .amap-simple-marker-icon {
+	background-position: -360px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-beige .amap-simple-marker-icon {
+	background-position: -396px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-lightgreen .amap-simple-marker-icon {
+	background-position: -432px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-lightblue .amap-simple-marker-icon {
+	background-position: -468px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-pink .amap-simple-marker-icon {
+	background-position: -504px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-lightpink .amap-simple-marker-icon {
+	background-position: -540px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-white .amap-simple-marker-icon {
+	background-position: -576px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-lightgray .amap-simple-marker-icon {
+	background-position: -612px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-gray .amap-simple-marker-icon {
+	background-position: -648px 0
+}
+
+.amap-simple-marker-def-style.amap-simple-marker-style-black .amap-simple-marker-icon {
+	background-position: -682px 0
+}
+
+.amap-simple-marker-fresh-style .amap-simple-marker-label {
+	line-height: 35px
+}
+
+.amap-simple-marker-fresh-style .amap-simple-marker-icon,.amap-simple-marker.amap-simple-marker-fresh-style {
+	width: 36px;
+	height: 44px;
+	display: block;
+	text-align: center
+}
+
+.amap-simple-marker-fresh-style .amap-simple-marker-icon {
+	background: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/fresh/fresh-fs8.png) no-repeat;
+	background-position: -10000px -10000px
+}
+
+@media (min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3/2),(-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5),(min-resolution:1.5dppx) {
+	.amap-simple-marker-fresh-style .amap-simple-marker-icon {
+		background-image: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/fresh/fresh_2x-fs8.png);
+		background-size: 720px 44px
+	}
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-lightgreen .amap-simple-marker-icon {
+	background-position: 0 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-beige .amap-simple-marker-icon {
+	background-position: -36px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-blue .amap-simple-marker-icon {
+	background-position: -72px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-darkblue .amap-simple-marker-icon {
+	background-position: -108px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-darkgreen .amap-simple-marker-icon {
+	background-position: -144px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-darkyellow .amap-simple-marker-icon {
+	background-position: -180px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-gray .amap-simple-marker-icon {
+	background-position: -216px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-green .amap-simple-marker-icon {
+	background-position: -252px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-lightblue .amap-simple-marker-icon {
+	background-position: -288px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-lightgray .amap-simple-marker-icon {
+	background-position: -324px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-black .amap-simple-marker-icon {
+	background-position: -360px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-lightpink .amap-simple-marker-icon {
+	background-position: -396px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-lightyellow .amap-simple-marker-icon {
+	background-position: -432px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-orange .amap-simple-marker-icon {
+	background-position: -468px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-orchid .amap-simple-marker-icon {
+	background-position: -504px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-pink .amap-simple-marker-icon {
+	background-position: -540px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-purple .amap-simple-marker-icon {
+	background-position: -576px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-red .amap-simple-marker-icon {
+	background-position: -612px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-salmon .amap-simple-marker-icon {
+	background-position: -648px 0
+}
+
+.amap-simple-marker-fresh-style.amap-simple-marker-style-yellow .amap-simple-marker-icon {
+	background-position: -684px 0
+}
+
+.amap-simple-marker-numv1-style .amap-simple-marker-label {
+	line-height: 35px
+}
+
+.amap-simple-marker-numv1-style .amap-simple-marker-icon,.amap-simple-marker.amap-simple-marker-numv1-style {
+	width: 36px;
+	height: 36px;
+	display: block;
+	text-align: center
+}
+
+.amap-simple-marker-numv1-style .amap-simple-marker-icon {
+	background: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/numv1/numv1-fs8.png) no-repeat;
+	background-position: -10000px -10000px
+}
+
+@media (min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3/2),(-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5),(min-resolution:1.5dppx) {
+	.amap-simple-marker-numv1-style .amap-simple-marker-icon {
+		background-image: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/numv1/numv1_2x-fs8.png);
+		background-size: 1620px 36px
+	}
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-pass .amap-simple-marker-icon {
+	background-position: 0 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-1 .amap-simple-marker-icon {
+	background-position: -36px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-3 .amap-simple-marker-icon {
+	background-position: -72px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-4 .amap-simple-marker-icon {
+	background-position: -108px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-5 .amap-simple-marker-icon {
+	background-position: -144px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-6 .amap-simple-marker-icon {
+	background-position: -180px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-7 .amap-simple-marker-icon {
+	background-position: -216px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-8 .amap-simple-marker-icon {
+	background-position: -252px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-9 .amap-simple-marker-icon {
+	background-position: -288px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-10 .amap-simple-marker-icon {
+	background-position: -324px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-11 .amap-simple-marker-icon {
+	background-position: -360px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-12 .amap-simple-marker-icon {
+	background-position: -396px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-13 .amap-simple-marker-icon {
+	background-position: -432px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-14 .amap-simple-marker-icon {
+	background-position: -468px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-15 .amap-simple-marker-icon {
+	background-position: -504px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-16 .amap-simple-marker-icon {
+	background-position: -540px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-17 .amap-simple-marker-icon {
+	background-position: -576px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-18 .amap-simple-marker-icon {
+	background-position: -612px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-19 .amap-simple-marker-icon {
+	background-position: -648px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-20 .amap-simple-marker-icon {
+	background-position: -684px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue .amap-simple-marker-icon {
+	background-position: -720px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-end .amap-simple-marker-icon {
+	background-position: -756px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-blue-2 .amap-simple-marker-icon {
+	background-position: -792px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-1 .amap-simple-marker-icon {
+	background-position: -828px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-2 .amap-simple-marker-icon {
+	background-position: -864px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-3 .amap-simple-marker-icon {
+	background-position: -900px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-4 .amap-simple-marker-icon {
+	background-position: -936px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-5 .amap-simple-marker-icon {
+	background-position: -972px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-6 .amap-simple-marker-icon {
+	background-position: -1008px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-7 .amap-simple-marker-icon {
+	background-position: -1044px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-8 .amap-simple-marker-icon {
+	background-position: -1080px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-9 .amap-simple-marker-icon {
+	background-position: -1116px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-10 .amap-simple-marker-icon {
+	background-position: -1152px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-11 .amap-simple-marker-icon {
+	background-position: -1188px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-12 .amap-simple-marker-icon {
+	background-position: -1224px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-13 .amap-simple-marker-icon {
+	background-position: -1260px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-14 .amap-simple-marker-icon {
+	background-position: -1296px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-15 .amap-simple-marker-icon {
+	background-position: -1332px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-16 .amap-simple-marker-icon {
+	background-position: -1368px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-17 .amap-simple-marker-icon {
+	background-position: -1404px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-18 .amap-simple-marker-icon {
+	background-position: -1440px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-19 .amap-simple-marker-icon {
+	background-position: -1476px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red-20 .amap-simple-marker-icon {
+	background-position: -1512px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-red .amap-simple-marker-icon {
+	background-position: -1548px 0
+}
+
+.amap-simple-marker-numv1-style.amap-simple-marker-style-start .amap-simple-marker-icon {
+	background-position: -1584px 0
+}
+
+.amap-simple-marker-numv2-style .amap-simple-marker-label {
+	line-height: 35px
+}
+
+.amap-simple-marker-numv2-style .amap-simple-marker-icon,.amap-simple-marker.amap-simple-marker-numv2-style {
+	width: 36px;
+	height: 36px;
+	display: block;
+	text-align: center
+}
+
+.amap-simple-marker-numv2-style .amap-simple-marker-icon {
+	background: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/numv2/numv2-fs8.png) no-repeat;
+	background-position: -10000px -10000px
+}
+
+@media (min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3/2),(-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5),(min-resolution:1.5dppx) {
+	.amap-simple-marker-numv2-style .amap-simple-marker-icon {
+		background-image: url(https://webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/assets/numv2/numv2_2x-fs8.png);
+		background-size: 1548px 36px
+	}
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-lightblue .amap-simple-marker-icon {
+	background-position: 0 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-1 .amap-simple-marker-icon {
+	background-position: -36px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-3 .amap-simple-marker-icon {
+	background-position: -72px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-4 .amap-simple-marker-icon {
+	background-position: -108px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-5 .amap-simple-marker-icon {
+	background-position: -144px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-6 .amap-simple-marker-icon {
+	background-position: -180px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-7 .amap-simple-marker-icon {
+	background-position: -216px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-8 .amap-simple-marker-icon {
+	background-position: -252px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-9 .amap-simple-marker-icon {
+	background-position: -288px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-10 .amap-simple-marker-icon {
+	background-position: -324px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-11 .amap-simple-marker-icon {
+	background-position: -360px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-12 .amap-simple-marker-icon {
+	background-position: -396px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-13 .amap-simple-marker-icon {
+	background-position: -432px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-14 .amap-simple-marker-icon {
+	background-position: -468px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-15 .amap-simple-marker-icon {
+	background-position: -504px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-16 .amap-simple-marker-icon {
+	background-position: -540px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-17 .amap-simple-marker-icon {
+	background-position: -576px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-18 .amap-simple-marker-icon {
+	background-position: -612px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-19 .amap-simple-marker-icon {
+	background-position: -648px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-20 .amap-simple-marker-icon {
+	background-position: -684px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue .amap-simple-marker-icon {
+	background-position: -720px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-blue-2 .amap-simple-marker-icon {
+	background-position: -756px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-1 .amap-simple-marker-icon {
+	background-position: -792px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-2 .amap-simple-marker-icon {
+	background-position: -828px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-3 .amap-simple-marker-icon {
+	background-position: -864px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-4 .amap-simple-marker-icon {
+	background-position: -900px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-5 .amap-simple-marker-icon {
+	background-position: -936px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-6 .amap-simple-marker-icon {
+	background-position: -972px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-7 .amap-simple-marker-icon {
+	background-position: -1008px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-8 .amap-simple-marker-icon {
+	background-position: -1044px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-9 .amap-simple-marker-icon {
+	background-position: -1080px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-10 .amap-simple-marker-icon {
+	background-position: -1116px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-11 .amap-simple-marker-icon {
+	background-position: -1152px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-12 .amap-simple-marker-icon {
+	background-position: -1188px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-13 .amap-simple-marker-icon {
+	background-position: -1224px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-14 .amap-simple-marker-icon {
+	background-position: -1260px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-15 .amap-simple-marker-icon {
+	background-position: -1296px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-16 .amap-simple-marker-icon {
+	background-position: -1332px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-17 .amap-simple-marker-icon {
+	background-position: -1368px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-18 .amap-simple-marker-icon {
+	background-position: -1404px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-19 .amap-simple-marker-icon {
+	background-position: -1440px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red-20 .amap-simple-marker-icon {
+	background-position: -1476px 0
+}
+
+.amap-simple-marker-numv2-style.amap-simple-marker-style-red .amap-simple-marker-icon {
+	background-position: -1512px 0
+}

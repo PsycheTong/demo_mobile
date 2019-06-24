@@ -1,0 +1,184 @@
+.pageLink.current {
+	background: #0091ff;
+	color: #fff;
+}
+
+.poibox:hover {
+	background-color: #cae1ff
+}
+
+.amap_lib_placeSearch_list {
+	background: #fff;
+}
+
+.amap_lib_placeSearch_page {
+	white-space: nowrap;
+	text-align: right;
+	background: #e5ecf9;
+	margin-top: 5px;
+	padding: 2px;
+	overflow: hidden;
+}
+
+.pageLink {
+	cursor: pointer;
+	line-height: 16px;
+	display: inline-block;
+	text-align: center;
+	padding: 0 4px;
+}
+
+.amap_lib_placeSearch .poibox .poi-info {
+	word-break: break-all;
+	margin: 0 0 0 25px;
+	overflow: hidden;
+}
+
+.amap_lib_placeSearch .clear {
+	clear: both;
+}
+
+.amap_lib_placeSearch .poibox {
+	border-bottom: 1px solid #eaeaea;
+	cursor: pointer;
+	padding: 5px 0 5px 10px;
+	position: relative;
+	min-height: 35px;
+}
+
+.amap_lib_placeSearch ol, .amap_lib_placeSearch_ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.amap_lib_placeSearch {
+	color: #565656;
+	font-size: 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+	-webkit-text-size-adjust: none;
+}
+
+.amap_lib_placeSearch .poibox .poibox-icon {
+	margin-left: 7px;
+	margin-top: 4px;
+}
+
+.amap_lib_placeSearch .amap_lib_placeSearch_poi {
+	position: absolute;
+}
+
+.amap_lib_placeSearch_poi {
+	background: url(http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png) no-repeat;
+	height: 31px;
+	width: 19px;
+	cursor: pointer;
+	left: -1px;
+	text-align: center;
+	color: #fff;
+	font: 12px arial,simsun,sans-serif;
+	padding-top: 3px;
+}
+
+.poi-img {
+	float: right;
+	margin: 3px 8px 0;
+	width: 90px;
+	height: 56px;
+	overflow: hidden;
+}
+
+.amap-ui-poi-picker-search-results-container {
+	border: 1px solid #ccc;
+	background: #fff
+}
+
+amap-ui-poi-picker-search-results-list {
+	margin: 0;
+	padding: 0
+}
+
+.search-item:hover {
+	background-color: #cae1ff
+}
+
+.search-item:last-child {
+	border-bottom: none
+}
+
+search-address {
+	font-size: 90%;
+	color: #999;
+	margin-left: 5px
+}
+
+.search-item {
+	list-style: none;
+	margin: 0;
+	border-bottom: 1px solid #eee;
+	font-size: 1em;
+	padding: 7px 5px 7px 40px;
+	vertical-align: middle;
+	cursor: pointer
+}
+
+.amap-ui-poi-picker-search-results-container,.amap-ui-poi-picker-sugg-container {
+	position: absolute;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	overflow: auto;
+	z-index: 9999
+}
+
+.amap-ui-poi-picker-search-results-container p.amap_lib_placeSearch {
+	margin: 0;
+	padding: 3px 10px
+}
+
+.amap-ui-poi-picker-sugg-container {
+	border: 1px solid #ccc;
+	background: #fff
+}
+
+.amap-ui-poi-picker-search-results-container.hidden,.amap-ui-poi-picker-sugg-container.hidden,.amap-ui-poi-picker-sugg-container.no-sugg {
+	display: none
+}
+
+.amap-ui-poi-picker-sugg-list {
+	margin: 0;
+	padding: 0
+}
+
+.amap-ui-poi-picker-sugg-list .sugg-item {
+	margin: 0;
+	border-bottom: 1px solid #eee;
+	font-size: 1em;
+	padding: 7px 5px 7px 23px;
+	background: url(  https://webapi.amap.com/ui/1.0/ui/misc/PoiPicker/assets/poi.png) no-repeat 5px 50%;
+	vertical-align: middle;
+	cursor: pointer
+}
+
+.amap-ui-poi-picker-sugg-list .sugg-item.sugg-no-id {
+	background: url(   https://webapi.amap.com/ui/1.0/ui/misc/PoiPicker/assets/search.png) no-repeat 5px 50%
+}
+
+.amap-ui-poi-picker-sugg-list .sugg-item.highlight,.amap-ui-poi-picker-sugg-list .sugg-item:hover {
+	background-color: #cae1ff
+}
+
+.amap-ui-poi-picker-sugg-list .sugg-item:last-child {
+	border-bottom: none
+}
+
+.amap-ui-poi-picker-sugg-list .sugg-address {
+	display: none
+}
+
+.amap-ui-poi-picker-sugg-list .sugg-district {
+	font-size: 90%;
+	color: #999;
+	margin-left: 5px
+}

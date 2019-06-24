@@ -1,0 +1,354 @@
+body,html,div,ul,li,iframe,dd,dl,dt,p,img{
+	border:none;padding:0;margin:0;
+}
+body,html{
+	width:100%;height:100%;overflow: hidden;
+}
+body{
+	font-size:12px;color:#000;font-family:"微软雅黑";
+}
+/**设置滚动条的样式**/
+::-webkit-scrollbar {
+    width: 10px;
+}
+/**滚动槽**/
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #d1cfcf; 
+    border-radius: 10px;
+}
+/**滚动条滑块**/
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background: #f7f7f7; 
+    -webkit-box-shadow: inset 0 0 6px #d1cfcf; 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(245,245,245,0.4); 
+}
+/**responsive**/
+@media screen and (max-width: 1024px){
+	#code_area,#code_open,#drag{
+		display:none !important;
+	}
+}
+/**clear float**/
+.clearfix{
+	display:block;zoom:1;
+}
+.clearfix:after{
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+/**头部**/
+#header{
+	width: 100%;
+	height: 9.2%;
+	background-color: #282828;
+	background-position:center center;
+	background-repeat:no-repeat;`
+	position: absolute;
+	background-size: 40%;
+}
+#header .title{
+	position:absolute;
+	left:0%;
+	top:0;
+	display:block;
+	padding-top:0.5rem;
+	font-size:16px;
+	color:#fff;
+	text-align:center;
+	width:100%;
+	
+}
+#header .logo{
+        display: block;
+    width: 4%;
+    height: 2%;
+    position: absolute;
+    top: 3.5%;
+    left: 5%;
+    background-image: url(../img/menu.png);
+    background-position: center center;
+    background-size: 100% 100%;
+}
+/**导航部分**/
+#content{
+	position: relative;
+	width:151%;
+	height:100%;
+	border-bottom: 1px solid #ccc;
+	bottom:0%;
+	left:-51.1%;
+}
+#menu{
+	position:absolute;
+	top:0;
+	left:0;
+	display:block;
+	width:33.7%;
+	height: 100%;
+	float:left;
+	
+	overflow-y: scroll;
+}
+#menu ul{
+	font-size:14px;
+	font-family:"微软雅黑";
+	background-color: #f7f9fd;
+	padding: 0px 10px;
+	color:#304051;
+}
+#menu ul li{
+	list-style:none;
+	border-bottom: 1px solid #e9e9e9;
+	padding: 15px 10px;
+}
+#menu>ul>li>a{
+	width:100%;
+	display:block;
+	height:21px;
+	text-decoration:none;
+	color:#304051;
+}
+#menu ul li:last-child{
+	border-bottom:none;
+}
+#menu .submenu a{
+	margin: 0;
+	text-decoration: none;
+	display: block;
+	height: 35px;
+	width: 100%;
+	color:#304051;
+}
+#menu .submenu{
+	z-index:9999;
+	width:100%;
+	margin-left: 6px;
+	margin-top: 10px;
+}
+#menu .submenu{
+	display:none;
+}
+#menu .submenu dl{
+	list-style-type:square;
+}
+#menu .submenu dl dd{
+	line-height: 35px;
+	height: 35px;
+	font-size:10px;
+}
+
+#menu .submenu dl dd a{
+	display:block;
+	width:90%;
+	height:100%;
+	text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+	margin-left: 11px;
+}
+
+#code_area #d_menu>div>a:hover{
+	cursor:pointer;
+	font-weight:bold;
+}
+#openbar>p{
+	line-height:36px;
+	margin-left:10px;
+}
+#menu a:hover,
+.clickState{
+	color:#6197fc !important;
+}
+
+#menu i{
+	width:13px;
+	height:13px;
+	display: block;
+	float: left;
+	margin-top: 4px;
+	margin-right: 7px;
+}
+#menu .t_close{
+	background:url(../img/result.png) no-repeat 0 -96px;
+}
+#menu .t_open{
+	background:url(../img/result.png) no-repeat 0 -119px;
+}
+#menu .one_head{
+	color:#304051;
+	
+}
+#menu .one_head img.back{
+	display:block;
+	width:0.5rem;
+	margin-top:1.0rem;
+	margin-right:0.5rem;
+	float:left;
+}
+#menu .one_head img{
+	display:block;
+	width:0.5rem;
+	margin-top: 0.2rem;
+	margin-right:0.5rem;
+	float:right;
+	
+}
+.fordown1{
+	transform:rotate(-90deg);
+}
+.fordown{
+	transform:rotate(90deg);
+	
+}
+
+/**地图部分**/
+#overiframe { 
+	width:66.3%; 
+	height:100%;
+	position:absolute;
+	z-index:999; 
+	display:none;
+	-webkit-user-select:none;
+}
+#mapContent{
+	border-left: 1px solid #e9e9e9;
+	overflow:hidden;
+	display:block;
+	width:66.3%;
+	height:100%;
+	position:absolute;
+	left:33.7%;
+	top:0;
+}
+#mapContent #container{
+    display:block;
+	width:100%;
+	height:90.8%;
+	overflow:hidden;
+	-webkit-user-select:none;
+}
+/**代码部分**/
+#code_area{
+	width: 500px;
+	-webkit-user-select: none;
+	float: left;
+	height:100%;
+	z-index:999;
+	position:relative;
+	box-shadow:3px 0px 6px rgba(0,0,0,0.1);
+}
+#code_area #myresource{
+	border:none;
+	width:100%;
+	height:350px;
+	outline:none;
+}
+#code_area #openbar{
+	padding:0;
+	height:36px;
+	background:#f6f6f6 url(../img/bg-footbar.gif) repeat-x;
+	overflow:hidden;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+#code_area #openbar span.split, 
+#code_area #openbar>a{
+	line-height:36px;
+	color:#000;
+	text-decoration:none;
+}
+#code_area #openbar .f-r{
+	color:#0083d6;
+	padding:0 0 0 20px;
+	line-height:36px;
+}
+#code_area #openbar  .on{
+	color:#0083d6;
+	background:url(../img/tab.png) no-repeat 0 7px;
+}#code_area #d_menu{
+	float:right;
+	width: 195px;
+}
+#code_area #d_menu div{
+	float:right;
+	margin-right:7px;
+}
+#code_area #d_menu i{
+	display: block;
+	float: left;
+	margin-top: 11px;
+	margin-right:3px;
+}
+#code_area #d_menu div a{
+	line-height:36px;
+	text-decoration:none;
+	padding-bottom: 2px;
+}
+#code_area #d_clip_container a{
+	background:url(../img/result.png) no-repeat 0 2px;
+	color:#3189f3;
+	padding-left:15px;
+}
+#code_area #d_run_container a{
+	background:url(../img/result.png) no-repeat 0 -23px;
+	color:#3189f3;
+	padding-left:17px;
+}
+#code_area #d_refresh_container a{
+	background:url(../img/result.png) no-repeat 0 -47px;
+	color:#3189f3;
+	padding-left:20px;
+}
+#code_area #d_help_container a{
+	background:url(../img/result.png) no-repeat 0 -71px;
+	color:#3189f3;
+	padding-left:17px;
+}
+#code_close{
+	display:none;
+	background: url(../img/result.png) no-repeat 0 -142px;
+	width: 14px;
+	height: 90px;
+	position: absolute;
+	right:0;
+	z-index: 9999;
+	top: 50%;
+	margin-top: -45px;
+}
+#code_open{
+	display:none;
+	background: url(../img/result.png) no-repeat 0 -242px;
+	width: 14px;
+	height: 90px;
+	position: absolute;
+	z-index: 9999;
+	top: 50%;
+	margin-top: -45px;
+}
+/*code add*/
+.CodeMirror{
+	font-family:Consolas,monaco,'Courier New', Courier, monospace;
+	position: absolute;
+	bottom: 0px;
+	top: 33px;
+	width:100%;
+}
+.CodeMirror pre{
+	line-height:1.5em;
+}
+.CodeMirror-sizer{
+	padding-left:2px;
+}
+#drag{
+	width: 2px;
+	height: 100%;
+	background: #eee;
+	cursor: w-resize;
+	float:left;
+}
